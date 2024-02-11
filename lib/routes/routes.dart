@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../views/home_view/home_page_view.dart';
+import '../views/login_view/login_page_view.dart';
+import '../views/welcome_view/welcome_page_view.dart';
+import '../views/wrapper_view/wrapper_view.dart';
+
 
 part 'routes.g.dart';
 
@@ -8,8 +13,9 @@ part 'routes.g.dart';
 
 GoRouter router() {
   return GoRouter(
-    navigatorKey: _key,
-    //refreshListenable: notifier,
+    // navigatorKey: ,
+
+    // refreshListenable: notifier,
     debugLogDiagnostics: true,
     initialLocation: WrapperRoute.path,
     routes: $appRoutes,
@@ -40,6 +46,28 @@ class WelcomePageViewRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const LogInView();
+    return WelcomePageView();
+  }
+}
+@TypedGoRoute<HomePageViewRoute>(path: HomePageViewRoute.path)
+class HomePageViewRoute extends GoRouteData {
+  const HomePageViewRoute();
+
+  static const path = '/home_page_view_path';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return HomePageView();
+  }
+}
+@TypedGoRoute<LoginPageViewRoute>(path: LoginPageViewRoute.path)
+class LoginPageViewRoute extends GoRouteData {
+  const LoginPageViewRoute();
+
+  static const path = '/login_page_view_path';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return LoginPageView();
   }
 }
