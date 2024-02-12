@@ -3,15 +3,9 @@ part of 'custom_widget_helper.dart';
 AppBar customHomeAppBar(context) {
   return AppBar(
       toolbarHeight: customHeight(context, percentage: 0.23),
-      shape: ContinuousRectangleBorder(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(customHeight(context,percentage: 0.2)),
-              bottomRight: Radius.circular(customHeight(context,percentage: 0.2)))),
+      shape:RoundedRectangleBorder(),
       backgroundColor: AppColor.appColorCornflowerBlue,
-      leading: 
-      
-        IconButton(icon:Icon( Icons.notifications), onPressed: () {  },),
-      
+
       actions: [
         SizedBox(
           width: customWidth(context,percentage: 0.7),
