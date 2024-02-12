@@ -22,6 +22,8 @@ AppBar customHomeAppBar(context) {
             ),
           ),
         ),
-        IconButton(icon:Icon( Icons.notifications), onPressed: () {  },),
+        Align(
+          alignment: Alignment.topRight,
+          child: IconButton(icon:Icon( Icons.notifications),color: AppColor.appColorWhite, onPressed: () {  },)),
       ]);
 }

@@ -22,7 +22,15 @@ class HomePageView extends StatelessWidget {
                 backgroundColor: AppColor.appColorWhite,
                 body: SafeArea(
                   top: bool.fromEnvironment('name'),
-                  child: Container())
+                  child: ListView(children: [
+                    
+
+                    SizedBox(child: Column(children: [ElevatedButton(onPressed: () {
+                      
+                    }, 
+                    style: ButtonStyle( ),
+                    child: Icon(Icons.abc))]),)
+                  ],))
               ),
             ));
   }
