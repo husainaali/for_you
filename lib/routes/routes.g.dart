@@ -11,6 +11,7 @@ List<RouteBase> get $appRoutes => [
       $welcomePageViewRoute,
       $homePageViewRoute,
       $loginPageViewRoute,
+      $shipmentsPageViewRoute,
     ];
 
 RouteBase get $wrapperRoute => GoRouteData.$route(
@@ -92,6 +93,29 @@ extension $LoginPageViewRouteExtension on LoginPageViewRoute {
 
   String get location => GoRouteData.$location(
         '/login_page_view_path',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $shipmentsPageViewRoute => GoRouteData.$route(
+      path: '/shipments_page_view_path',
+      factory: $ShipmentsPageViewRouteExtension._fromState,
+    );
+
+extension $ShipmentsPageViewRouteExtension on ShipmentsPageViewRoute {
+  static ShipmentsPageViewRoute _fromState(GoRouterState state) =>
+      const ShipmentsPageViewRoute();
+
+  String get location => GoRouteData.$location(
+        '/shipments_page_view_path',
       );
 
   void go(BuildContext context) => context.go(location);

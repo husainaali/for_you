@@ -33,14 +33,14 @@ Widget bottomNavigationBar(context, WrapperViewModel model) {
         BottomNavigationBarItem(
             icon: Icon(
               Icons.home, 
-              color: model.selectedItem ==0? AppColor.appColorAccentRed:AppColor.appColorGrey,
+              color: model.selectedItem ==0? AppColor.appColorAccentRed:AppColor.appColorGreylight,
             ),
             backgroundColor: AppColor.appColorCornflowerBlue,
             label: ''),
         BottomNavigationBarItem(
             icon: Icon(
               Icons.pin_drop,
-              color: model.selectedItem ==1? AppColor.appColorAccentRed:AppColor.appColorGrey,
+              color: model.selectedItem ==1? AppColor.appColorAccentRed:AppColor.appColorGreylight,
 
             ),
             backgroundColor: AppColor.appColorCornflowerBlue,
@@ -48,14 +48,14 @@ Widget bottomNavigationBar(context, WrapperViewModel model) {
         BottomNavigationBarItem(
             icon: Icon(
               Icons.calculate,
-              color: model.selectedItem ==2? AppColor.appColorAccentRed:AppColor.appColorGrey,
+              color: model.selectedItem ==2? AppColor.appColorAccentRed:AppColor.appColorGreylight,
             ),
             backgroundColor: AppColor.appColorCornflowerBlue,
             label: ''),
         BottomNavigationBarItem(
             icon: Icon(
               Icons.person,
-              color: model.selectedItem ==3? AppColor.appColorAccentRed:AppColor.appColorGrey,
+              color: model.selectedItem ==3? AppColor.appColorAccentRed:AppColor.appColorGreylight,
             ),
             backgroundColor: AppColor.appColorCornflowerBlue,
             label: ''),

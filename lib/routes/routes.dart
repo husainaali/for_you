@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../views/home_view/home_page_view.dart';
 import '../views/login_view/login_page_view.dart';
+import '../views/shipments_view/shipments_page_view.dart';
 import '../views/welcome_view/welcome_page_view.dart';
 import '../views/wrapper_view/wrapper_view.dart';
 
@@ -69,5 +70,16 @@ class LoginPageViewRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return LoginPageView();
+  }
+}
+@TypedGoRoute<ShipmentsPageViewRoute>(path: ShipmentsPageViewRoute.path)
+class ShipmentsPageViewRoute extends GoRouteData {
+  const ShipmentsPageViewRoute();
+
+  static const path = '/shipments_page_view_path';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return ShipmentsPageView();
   }
 }

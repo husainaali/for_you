@@ -10,4 +10,6 @@ class HomePageViewModel extends BaseModel {
 
       initialize() {}
 
+      
+
 }
