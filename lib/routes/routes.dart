@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../views/calculator_page_view/calculator_page_view.dart';
 import '../views/home_view/home_page_view.dart';
 import '../views/login_view/login_page_view.dart';
 import '../views/shipments_view/shipments_page_view.dart';
@@ -81,5 +82,16 @@ class ShipmentsPageViewRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return ShipmentsPageView();
+  }
+}
+@TypedGoRoute<CalculatorPageViewRoute>(path: CalculatorPageViewRoute.path)
+class CalculatorPageViewRoute extends GoRouteData {
+  const CalculatorPageViewRoute();
+
+  static const path = '/calculator_page_view_path';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return CalculatorPageView();
   }
 }

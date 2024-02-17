@@ -3,6 +3,7 @@ import 'package:for_you/views/shipments_view/shipments_page_view.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../widgets/custom_widget_helper.dart';
+import '../calculator_page_view/calculator_page_view.dart';
 import '../home_view/home_page_view.dart';
 import '../shipments_view/shipment_details_view.dart';
 import 'wrapper_view_model.dart';
@@ -19,6 +20,6 @@ class WrapperView extends StatelessWidget {
         onViewModelReady: (model) => model.initialize(),
         builder: (context, model, child) => Scaffold(
           bottomNavigationBar: bottomNavigationBar(context,model),
-          body: !model.loggedIn ? HomePageView() : ShpmentDetailsView()));
+          body: !model.loggedIn ? HomePageView() : CalculatorPageView()));
   }
 }

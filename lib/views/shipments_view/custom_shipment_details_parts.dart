@@ -227,23 +227,96 @@ customShipmentDetailsContainer(context) {
 }
 
 Widget customShipmentHistoryTimeLine(BuildContext context) {
-  return Container(
-    height: MediaQuery.of(context).size.height * 0.4, // Adjust the height as needed
+  return SizedBox(
+    width: customWidth(context),
+    height: customHeight(context),
     child: ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: 40,
       itemBuilder: (context, index) {
-        return TimelineTile(
-          axis: TimelineAxis.horizontal,
-          alignment: TimelineAlign.manual,
-          lineXY: 0.1,
-          isFirst: true,
-          indicatorStyle: const IndicatorStyle(
-            height: 20,
-            color: Colors.purple,
+        return Container(
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom:
+                  BorderSide(width: 1.0, color: AppColor.appColorGreyNormal),
+            ),
           ),
-          beforeLineStyle: const LineStyle(
-            color: Colors.purple,
-            thickness: 6,
+          height: customHeight(context, percentage: 0.17),
+          width: customWidth(context),
+          child: Row(
+            children: [
+              Gap(customWidth(context, percentage: 0.06)),
+              Column(
+                children: [
+                  Container(
+                    color: AppColor.appColorGreyNormal,
+                    width: customWidth(context, percentage: 0.002),
+                    height: customHeight(context, percentage: 0.04),
+                  ),
+                  Container(
+                    width: customHeight(context, percentage: 0.015),
+                    height: customHeight(context, percentage: 0.015),
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColor.appColorGreyNormal),
+                  ),
+                  Container(
+                    color: AppColor.appColorGreyNormal,
+                    width: customWidth(context, percentage: 0.002),
+                    height: customHeight(context, percentage: 0.113),
+                  ),
+                ],
+              ),
+              RichText(
+                textScaleFactor: 1.0,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Out for Delivery\n',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: customHeight(context, percentage: 0.017),
+                        color: AppColor.appColorGreyNormal,
+                      ),
+                    ),
+                    TextSpan(
+                      text: '\n',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: customHeight(context, percentage: 0.01),
+                        color: AppColor.appColorGreyNormal,
+                      ),
+                    ),
+                    TextSpan(
+                      text: '11 feb 2024\n',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: customHeight(context, percentage: 0.017),
+                        color: AppColor.appColorGreyNormal,
+                      ),
+                    ),
+                                        TextSpan(
+                      text: '\n',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: customHeight(context, percentage: 0.01),
+                        color: AppColor.appColorGreyNormal,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'Manama - Bahrain\n',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: customHeight(context, percentage: 0.017),
+                        color: AppColor.appColorGreyNormal,
+                      ),
+                    ),
+                   
+                  ],
+                ),
+              ),
+            ],
           ),
         );
       },
