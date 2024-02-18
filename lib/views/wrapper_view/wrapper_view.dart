@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:for_you/views/calculator_page_view/send_shipment_page_view.dart';
 import 'package:for_you/views/shipments_view/shipments_page_view.dart';
 import 'package:stacked/stacked.dart';
 
@@ -20,6 +21,6 @@ class WrapperView extends StatelessWidget {
         onViewModelReady: (model) => model.initialize(),
         builder: (context, model, child) => Scaffold(
           bottomNavigationBar: bottomNavigationBar(context,model),
-          body: !model.loggedIn ? HomePageView() : CalculatorPageView()));
+          body: !model.loggedIn ? HomePageView() : SendShipmentPageView()));
   }
 }

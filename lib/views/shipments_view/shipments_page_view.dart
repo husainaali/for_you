@@ -22,7 +22,7 @@ class ShipmentsPageView extends StatelessWidget {
         builder: (context, model, child) => SafeArea(
               child: Scaffold(
                   appBar: customShortAppBar(context,
-                      parentPage: SizedBox(
+                      parentPage:'shipments_page_view',resources: SizedBox(
                         width: customWidth(context),
                         height: customWidth(context, percentage: 0.23),
                         child: Row(

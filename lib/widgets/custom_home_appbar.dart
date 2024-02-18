@@ -31,10 +31,15 @@ AppBar customLongAppBar(context) {
       ]);
 }
 
-AppBar customShortAppBar(BuildContext context, {parentPage}) {
+AppBar customShortAppBar(BuildContext context, {parentPage, resources}) {
   return AppBar(
-    
-    bottom: PreferredSize( child:ColoredBox( color:AppColor.appColorWhite,child: parentPage),preferredSize:Size(customWidth(context), customHeight(context,percentage: 0.11)) ),
+      bottom: parentPage == 'shipments_page_view'
+          ? PreferredSize(
+              child:
+                  ColoredBox(color: AppColor.appColorWhite, child: resources),
+              preferredSize: Size(customWidth(context),
+                  customHeight(context, percentage: 0.11)))
+          : null,
       toolbarHeight: customHeight(context, percentage: 0.08),
       shape: RoundedRectangleBorder(),
       backgroundColor: AppColor.appColorCornflowerBlue,
@@ -61,16 +66,16 @@ AppBar customShortAppBar(BuildContext context, {parentPage}) {
             )),
       ]);
 }
+
 AppBar customShipmentDatailsAppBar(BuildContext context, {parentPage}) {
   return AppBar(
-    
       toolbarHeight: customHeight(context, percentage: 0.18),
       shape: RoundedRectangleBorder(),
-      backgroundColor: AppColor.appColorCornflowerBlueLight1,
+      backgroundColor: AppColor.appColorCornflowerBlueLight,
       foregroundColor: AppColor.appColorCornflowerBlue,
       actions: [
         SizedBox(
-          height: customHeight(context,percentage: 0.15),
+          height: customHeight(context, percentage: 0.15),
           width: customWidth(context),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,18 +83,16 @@ AppBar customShipmentDatailsAppBar(BuildContext context, {parentPage}) {
             children: [
               SvgPicture.asset('assets/package_icon.svg',
                   height: customHeight(context, percentage: 0.06)),
-                  AutoSizeText(
-                          'TR123456789CK',
-                          style: TextStyle(
-                              fontSize:
-                                  customHeight(context, percentage: 0.027),
-                              fontWeight: FontWeight.w300,
-                              color: AppColor.appColorCornflowerBlue),
-                          maxLines: 1,
-                        ),
+              AutoSizeText(
+                'TR123456789CK',
+                style: TextStyle(
+                    fontSize: customHeight(context, percentage: 0.027),
+                    fontWeight: FontWeight.w300,
+                    color: AppColor.appColorCornflowerBlue),
+                maxLines: 1,
+              ),
             ],
           ),
         ),
-      
       ]);
 }

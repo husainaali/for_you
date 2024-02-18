@@ -100,7 +100,7 @@ customShipmentsList(context, model) {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(
                                 customHeight(context, percentage: 0.03)),
-                            color: AppColor.appColorCornflowerBlueLight1,
+                            color: AppColor.appColorCornflowerBlueLight,
                             border: Border.all(
                                 width: customHeight(context, percentage: 0.0016),
                                 color: model.isForYouBtnSelected
@@ -198,7 +198,7 @@ customShipmentsList(context, model) {
                         width: customWidth(context),
                         height: customHeight(context, percentage: 0.06),
                         decoration: BoxDecoration(
-                            color: AppColor.appColorCornflowerBlueLight1,
+                            color: AppColor.appColorCornflowerBlueLight,
                             border: Border.all(
                                 width: customHeight(context, percentage: 0.0016),
                                 color: model.isForYouBtnSelected
