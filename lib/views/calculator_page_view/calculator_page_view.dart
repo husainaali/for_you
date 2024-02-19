@@ -184,32 +184,7 @@ class CalculatorPageView extends StatelessWidget {
                             ),
                           ),
                           Gap(customHeight(context,percentage: 0.013)),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                                  style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(customHeight(context,percentage: 0.2)),
-                                      ),
-                                    ),
-                                    backgroundColor: MaterialStateProperty.all(
-                                         AppColor.appColorCornflowerBlue
-                                        ),
-                                  ),
-                                  onPressed: () {
-                                  
-                                  },
-                                  child: AutoSizeText(
-                                    'Send Shipment',
-                                    style: TextStyle(
-                                        fontSize: customHeight(context, percentage: 0.02),
-                                        fontWeight: FontWeight.w300,
-                                        color: AppColor.appColorWhite),
-                                    maxLines: 1,
-                                  ),
-                                ),
-                          ),
+                          customRequestButtom(context,'Send Shipment'),
                         ],
                       ))),
             ));

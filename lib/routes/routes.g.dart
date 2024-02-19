@@ -14,6 +14,7 @@ List<RouteBase> get $appRoutes => [
       $shipmentsPageViewRoute,
       $calculatorPageViewRoute,
       $sendShipmentPageViewRoute,
+      $settingPageViewRoute,
     ];
 
 RouteBase get $wrapperRoute => GoRouteData.$route(
@@ -164,6 +165,29 @@ extension $SendShipmentPageViewRouteExtension on SendShipmentPageViewRoute {
 
   String get location => GoRouteData.$location(
         '/send_shipment_page_view_path',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $settingPageViewRoute => GoRouteData.$route(
+      path: '/setting_page_view_path',
+      factory: $SettingPageViewRouteExtension._fromState,
+    );
+
+extension $SettingPageViewRouteExtension on SettingPageViewRoute {
+  static SettingPageViewRoute _fromState(GoRouterState state) =>
+      const SettingPageViewRoute();
+
+  String get location => GoRouteData.$location(
+        '/setting_page_view_path',
       );
 
   void go(BuildContext context) => context.go(location);

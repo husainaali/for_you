@@ -5,6 +5,8 @@ import '../views/calculator_page_view/calculator_page_view.dart';
 import '../views/calculator_page_view/send_shipment_page_view.dart';
 import '../views/home_view/home_page_view.dart';
 import '../views/login_view/login_page_view.dart';
+import '../views/login_view/registeration_page_view.dart';
+import '../views/setting_view/setting_page_view.dart';
 import '../views/shipments_view/shipments_page_view.dart';
 import '../views/welcome_view/welcome_page_view.dart';
 import '../views/wrapper_view/wrapper_view.dart';
@@ -105,5 +107,27 @@ class SendShipmentPageViewRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return SendShipmentPageView();
+  }
+}
+@TypedGoRoute<SettingPageViewRoute>(path: SettingPageViewRoute.path)
+class SettingPageViewRoute extends GoRouteData {
+  const SettingPageViewRoute();
+
+  static const path = '/setting_page_view_path';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return SettingPageView();
+  }
+}
+@TypedGoRoute<RegistrationPageViewRoute>(path: RegistrationPageViewRoute.path)
+class RegistrationPageViewRoute extends GoRouteData {
+  const RegistrationPageViewRoute();
+
+  static const path = '/registration_page_view_path';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return RegistrationPageView();
   }
 }

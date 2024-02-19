@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:for_you/views/calculator_page_view/send_shipment_page_view.dart';
+import 'package:for_you/views/setting_view/setting_page_view.dart';
 import 'package:for_you/views/shipments_view/shipments_page_view.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../widgets/custom_widget_helper.dart';
 import '../calculator_page_view/calculator_page_view.dart';
 import '../home_view/home_page_view.dart';
+import '../login_view/login_page_view.dart';
+import '../login_view/registeration_page_view.dart';
 import '../shipments_view/shipment_details_view.dart';
 import 'wrapper_view_model.dart';
 
@@ -21,6 +24,6 @@ class WrapperView extends StatelessWidget {
         onViewModelReady: (model) => model.initialize(),
         builder: (context, model, child) => Scaffold(
           bottomNavigationBar: bottomNavigationBar(context,model),
-          body: !model.loggedIn ? HomePageView() : SendShipmentPageView()));
+          body: !model.loggedIn ? HomePageView() : RegistrationPageView()));
   }
 }

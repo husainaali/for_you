@@ -8,8 +8,12 @@ import '../../widgets/custom_widget_helper.dart';
 import 'calculator_page_view_model.dart';
 
 class SendShipmentPageView extends StatelessWidget {
-  const SendShipmentPageView({super.key});
+  SendShipmentPageView({super.key});
 
+  final Icon leadingIcon =
+      const Icon(Icons.home, color: AppColor.appColorCornflowerBlue);
+  final IconButton actionIcon = IconButton(
+      onPressed: () {}, icon: SvgPicture.asset('assets/edit_icon.svg'));
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CalculatorPageViewModel>.reactive(
@@ -27,7 +31,7 @@ class SendShipmentPageView extends StatelessWidget {
                             left: customWidth(context, percentage: 0.05),
                             right: customWidth(context, percentage: 0.05)),
                         children: [
-                          Center(
+                          const Center(
                             child: AutoSizeText(
                               '5.600 BHD',
                               maxFontSize: 42,
@@ -37,43 +41,92 @@ class SendShipmentPageView extends StatelessWidget {
                                   color: AppColor.appColorCornflowerBlue),
                             ),
                           ),
-                          Gap(10),
-                          AutoSizeText(
-                            '   Shipment from*',
-                            maxFontSize: 24,
-                            minFontSize: 18,
-                            style: TextStyle(
-                                color: AppColor.appColorCornflowerBlue),
-                          ),
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
+                          Gap(customHeight(context, percentage: 0.02)),
+                          customPicker(
+                              context,
+                              '   Pick up address',
+                              'Ahmed - salmabad building 1234 road 321 block 12',
+                              AppColor.appColorCornflowerBlueLight,
+                              0.1,
+                              2,
+                              leadingIcon,actionIcon),
+                          Gap(customHeight(context, percentage: 0.02)),
+                          customPicker(
+                              context,
+                              '   Pick up date and time',
+                              '08:30 am - 02 Feb 2024',
+                              AppColor.appColorWhite,
+                              0.07,
+                              1,const Icon(Icons.calendar_month_outlined, color: AppColor.appColorCornflowerBlue),actionIcon),
+                          Gap(customHeight(context, percentage: 0.02)),
+                          customPicker(
+                              context,
+                              '   Dropping address',
+                              'Ahmed - salmabad building 1234 road 321 block 12',
+                              AppColor.appColorCornflowerBlueLight,
+                              0.1,
+                              2,
+                              leadingIcon,actionIcon),
+                          Gap(customHeight(context, percentage: 0.02)),
+                          customTitleLable('Shipping service type'),
+                          Row(
+                            children: List.generate(
+                              2,
+                              (index) => SizedBox(
+                                height: customHeight(context, percentage: 0.03),
+                                child: Row(
+                                  children: [
+                                    Radio(
+                                      focusColor: AppColor.appColorGreyNormal,
+                                      activeColor: AppColor.appColorGreyNormal,
+                                      overlayColor: MaterialStateProperty.all(
+                                          AppColor.appColorGreyNormal),
+                                      fillColor: MaterialStateProperty.all(
+                                          AppColor.appColorGreyNormal),
+                                      value: true,
+                                      toggleable: true,
+                                      groupValue: null,
+                                      onChanged: (value) {},
+                                    ),
+                                    AutoSizeText(
+                                      index == 0 ? 'kg' : 'lb',
+                                      maxFontSize: 14,
+                                      minFontSize: 14,
+                                      style: const TextStyle(
+                                          color: AppColor.appColorGreyNormal),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              backgroundColor: MaterialStateProperty.all(
-                                  AppColor.appColorCornflowerBlueLight),
-                            ),
-                            onPressed: () {
-                              model.notifyListeners();
-                            },
-                            child: Row(
-                              children: [
-                                Icon(Icons.home),
-                                AutoSizeText(
-                                  'Ahmed - salmabad\nbuilding 1234 road 321 block 12',
-                                  style: TextStyle(
-                                      fontSize: customHeight(context,
-                                          percentage: 0.2),
-                                      fontWeight: FontWeight.w200,
-                                      color: AppColor.appColorWhite),
-                                  maxLines: 1,
-                                ),
-                              ],
                             ),
                           ),
+                          Gap(customHeight(context, percentage: 0.02)),
+                          customTitleLable('Dropping time'),
+                          SizedBox(
+                            width: customWidth(context),
+                            height: customHeight(context, percentage: 0.09),
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 4,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                      padding: EdgeInsets.only(
+                                          right: customWidth(context,
+                                              percentage: 0.02),
+                                          top: customHeight(context,
+                                              percentage: 0.02),
+                                          bottom: customHeight(context,
+                                              percentage: 0.001)),
+                                      child: customTimeItem(
+                                          context,
+                                          index == 1
+                                              ? AppColor.appColorCornflowerBlue
+                                              : AppColor.appColorGreyNormal,
+                                          '08:30 am 03 Feb 2024'));
+                                }),
+                          ),
+                          Gap(customHeight(context, percentage: 0.02)),
+                          customRequestButtom(context, 'Submit'),
                         ])))));
   }
 }
