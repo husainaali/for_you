@@ -8,7 +8,7 @@ import '../../widgets/custom_widget_helper.dart';
 import '../calculator_page_view/calculator_page_view.dart';
 import '../home_view/home_page_view.dart';
 import '../login_view/login_page_view.dart';
-import '../login_view/registeration_page_view.dart';
+import '../login_view/registration_page_view.dart';
 import '../shipments_view/shipment_details_view.dart';
 import 'wrapper_view_model.dart';
 

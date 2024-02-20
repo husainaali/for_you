@@ -85,7 +85,7 @@ class LoginPageView extends StatelessWidget {
                 ),
 
                 const TextField(
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.visiblePassword,
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: 'Password',

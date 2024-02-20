@@ -5,7 +5,7 @@ import '../views/calculator_page_view/calculator_page_view.dart';
 import '../views/calculator_page_view/send_shipment_page_view.dart';
 import '../views/home_view/home_page_view.dart';
 import '../views/login_view/login_page_view.dart';
-import '../views/login_view/registeration_page_view.dart';
+import '../views/login_view/registration_page_view.dart';
 import '../views/setting_view/setting_page_view.dart';
 import '../views/shipments_view/shipments_page_view.dart';
 import '../views/welcome_view/welcome_page_view.dart';
