@@ -24,19 +24,16 @@ class HomePageView extends StatelessWidget {
     return ViewModelBuilder<HomePageViewModel>.reactive(
         viewModelBuilder: () => HomePageViewModel(),
         onViewModelReady: (model) => model.initialize(),
-        builder: (context, model, child) => SafeArea(
-              child: Scaffold(
-                  appBar: customLongAppBar(context),
-                  backgroundColor: AppColor.appColorWhite,
-                  body: SafeArea(
-                      top: bool.fromEnvironment('name'),
-                      child: ListView(
-                        children: [
-                          customTextFieldTracking(context),
-                          customHomeButton(context),
-                          customAdsBanner(context),
-                        ],
-                      ))),
-            ));
+        builder: (context, model, child) => Scaffold(
+            appBar: customLongAppBar(context),
+            backgroundColor: AppColor.appColorWhite,
+            body: SafeArea(
+                child: ListView(
+                  children: [
+                    customTextFieldTracking(context),
+                    customHomeButton(context),
+                    customAdsBanner(context),
+                  ],
+                ))));
   }
 }

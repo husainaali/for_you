@@ -10,6 +10,8 @@ class CalculatorPageViewModel extends BaseModel {
 
       initialize() {}
 
+  generalRequester() {}
+
       
 
 }

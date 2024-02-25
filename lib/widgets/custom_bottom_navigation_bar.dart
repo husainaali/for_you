@@ -9,53 +9,57 @@ Widget bottomNavigationBar(context, WrapperViewModel model) {
       onTap: (value) async {
         model.onNavigationBarTapped(value);
         if (value == 0) {
-          model.selectedPage= HomePageView();
+          model.selectedPage = HomePageView();
           model.selectedItem = 0;
+          model.notifyListeners();
         } else if (value == 1) {
-          model.selectedPage= HomePageView();
+          model.selectedPage = HomePageView();
           model.selectedItem = 1;
-
-
-
+          model.notifyListeners();
         } else if (value == 2) {
-
-          model.selectedPage= HomePageView();
+          model.selectedPage = CalculatorPageView();
           model.selectedItem = 2;
-
+          model.notifyListeners();
         } else if (value == 3) {
-
-          model.selectedPage= SettingPageView();
+          model.selectedPage = SettingPageView();
           model.selectedItem = 3;
-
+          model.notifyListeners();
         }
       },
       items: [
         BottomNavigationBarItem(
             icon: Icon(
-              Icons.home, 
-              color: model.selectedItem ==0? AppColor.appColorAccentRed:AppColor.appColorGreylight,
+              Icons.home,
+              color: model.selectedItem == 0
+                  ? AppColor.appColorAccentRed
+                  : AppColor.appColorGreylight,
             ),
             backgroundColor: AppColor.appColorCornflowerBlue,
             label: ''),
         BottomNavigationBarItem(
             icon: Icon(
               Icons.pin_drop,
-              color: model.selectedItem ==1? AppColor.appColorAccentRed:AppColor.appColorGreylight,
-
+              color: model.selectedItem == 1
+                  ? AppColor.appColorAccentRed
+                  : AppColor.appColorGreylight,
             ),
             backgroundColor: AppColor.appColorCornflowerBlue,
             label: ''),
         BottomNavigationBarItem(
             icon: Icon(
               Icons.calculate,
-              color: model.selectedItem ==2? AppColor.appColorAccentRed:AppColor.appColorGreylight,
+              color: model.selectedItem == 2
+                  ? AppColor.appColorAccentRed
+                  : AppColor.appColorGreylight,
             ),
             backgroundColor: AppColor.appColorCornflowerBlue,
             label: ''),
         BottomNavigationBarItem(
             icon: Icon(
               Icons.person,
-              color: model.selectedItem ==3? AppColor.appColorAccentRed:AppColor.appColorGreylight,
+              color: model.selectedItem == 3
+                  ? AppColor.appColorAccentRed
+                  : AppColor.appColorGreylight,
             ),
             backgroundColor: AppColor.appColorCornflowerBlue,
             label: ''),

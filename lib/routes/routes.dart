@@ -128,6 +128,12 @@ class RegistrationPageViewRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return RegistrationPageView();
+        Map data = state.extra as Map;
+
+    return RegistrationPageView(
+            userName: data['userName'],
+      password: data['password'],
+
+    );
   }
 }

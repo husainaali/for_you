@@ -1,9 +1,13 @@
 part of 'registration_page_view.dart';
 
-customRegistrationTextFeild(context, label) {
+customRegistrationTextFeild(context, label,controller,LoginPageViewModel model) {
   return TextField(
+    controller: controller,
     keyboardType: TextInputType.name,
-    obscureText: true,
+onChanged: (value) {
+  model.fillRegistrationForm(value,label);
+},
+    // obscureText: true,
     decoration: InputDecoration(
       labelText: label,
       labelStyle: const TextStyle(color: AppColor.appColorCornflowerBlue),
@@ -19,28 +23,27 @@ customRegistrationTextFeild(context, label) {
   );
 }
 
-customUserForm(context) {
+customUserForm(context,LoginPageViewModel model) {
   return Column(
     children: [
-      customRegistrationTextFeild(context, 'Full Name'),
-      customRegistrationTextFeild(context, 'Personal ID'),
-      customRegistrationTextFeild(context, 'Occupation'),
-      customRegistrationTextFeild(context, 'Date of Birth '),
-      customRegistrationTextFeild(context, 'Address'),
-      customRegistrationTextFeild(context, 'Contact No. 1'),
-      customRegistrationTextFeild(context, 'Contact No. 2')
+      customRegistrationTextFeild(context, 'Full Name',model.textControllerUserFullName,model),
+      customRegistrationTextFeild(context, 'Personal ID',model.textControllerUserCPR,model),
+      customRegistrationTextFeild(context, 'Occupation',model.textControllerUserOccupation,model),
+      customRegistrationTextFeild(context, 'Date of Birth',model.textControllerUserDOB,model),
+      customRegistrationTextFeild(context, 'Address',model.textControllerUserAddress,model),
+      customRegistrationTextFeild(context, 'Contact No. 1',model.textControllerUserContactNo1,model),
+      customRegistrationTextFeild(context, 'Contact No. 2',model.textControllerUserContactNo2,model)
     ],
   );
 }
 
-customManagerForm(context) {
+customManagerForm(context,LoginPageViewModel model) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      customRegistrationTextFeild(context, 'Commercial Name'),
-      
-      customRegistrationTextFeild(context, 'Commercial ID'),
-      customRegistrationTextFeild(context, 'Business Type'),
+      customRegistrationTextFeild(context,'Commercial Name',model.textControllerManagerCommercialName,model),
+      customRegistrationTextFeild(context,'Commercial ID',model.textControllerManagerCommercialID,model),
+      customRegistrationTextFeild(context,'Business Type',model.textControllerManagerBusinessType,model),
       Gap(customHeight(context,percentage: 0.01)),
       Text('Size of company/employee ',style: TextStyle(color: AppColor.appColorGreyNormal),),
       Row(
@@ -58,7 +61,10 @@ customManagerForm(context) {
                       MaterialStateProperty.all(AppColor.appColorGreyNormal),
                   value: true,
                   groupValue: null,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+
+
+                  },
                 ),
                 AutoSizeText(
                   index == 0
@@ -75,9 +81,9 @@ customManagerForm(context) {
           ),
         ),
       ),
-      customRegistrationTextFeild(context, 'Address'),
-      customRegistrationTextFeild(context, 'Contact No. 1'),
-      customRegistrationTextFeild(context, 'Contact No. 2')
+      customRegistrationTextFeild(context,'Address'      ,model.textControllerManagerAddress,model),
+      customRegistrationTextFeild(context,'Contact No. 1',model.textControllerManagerContactNo1,model),
+      customRegistrationTextFeild(context,'Contact No. 2',model.textControllerManagerContactNo2,model)
     ],
   );
 }

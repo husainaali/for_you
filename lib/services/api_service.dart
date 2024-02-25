@@ -10,7 +10,7 @@ import '../models/multi_part_request.dart';
 class ApiService {
   final String appBaseUrl = AppConfig.appBaseUrl;
 
-  Future<Response> drdGetData(String url) async {
+  Future<Response> foryouGetData(String url) async {
     try {
       Response response = await getData(
         Uri.parse(appBaseUrl + url),
@@ -21,7 +21,7 @@ class ApiService {
     }
   }
 
-  Future<Response> drdPostData(
+  Future<Response> foryouPostData(
     String url,
     dynamic body,
   ) async {

@@ -126,7 +126,7 @@ class SendShipmentPageView extends StatelessWidget {
                                 }),
                           ),
                           Gap(customHeight(context, percentage: 0.02)),
-                          customRequestButtom(context, 'Submit'),
+                          customRequestButton(context, 'Submit',model.generalRequester()),
                         ])))));
   }
 }
