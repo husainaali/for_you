@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:for_you/constants/constants_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:for_you/models/countries.dart';
 import 'package:gap/gap.dart';
 import 'package:stacked/stacked.dart';
 import '../../widgets/custom_widget_helper.dart';
@@ -16,7 +17,7 @@ class CalculatorPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CalculatorPageViewModel>.reactive(
         viewModelBuilder: () => CalculatorPageViewModel(),
-        onViewModelReady: (model) => model.initialize(),
+        onViewModelReady: (model) => model.initialize(context),
         builder: (context, model, child) => Scaffold(
             appBar: customLongAppBar(context),
             backgroundColor: AppColor.appColorWhite,
@@ -32,11 +33,12 @@ class CalculatorPageView extends StatelessWidget {
                       '   Shipment from*',
                       maxFontSize: 24,
                       minFontSize: 18,
-                      style: TextStyle(
-                          color: AppColor.appColorCornflowerBlue),
+                      style: TextStyle(color: AppColor.appColorCornflowerBlue),
                     ),
-                    customDropDownMenu(context),
-                    customDropDownMenu(context),
+                    customDropDownMenu(
+                        context, model.countryList, 'FromCountry', model),
+                    customDropDownMenu(
+                        context, model.fromCities, 'FromCity', model),
                     Gap(
                       customHeight(context, percentage: 0.03),
                     ),
@@ -44,11 +46,12 @@ class CalculatorPageView extends StatelessWidget {
                       '   Shipment to*',
                       maxFontSize: 24,
                       minFontSize: 18,
-                      style: TextStyle(
-                          color: AppColor.appColorCornflowerBlue),
+                      style: TextStyle(color: AppColor.appColorCornflowerBlue),
                     ),
-                    customDropDownMenu(context),
-                    customDropDownMenu(context),
+                    customDropDownMenu(
+                        context, model.countryList, 'ToCountry', model),
+                    customDropDownMenu(
+                        context, model.toCities, 'ToCity', model),
                     Gap(
                       customHeight(context, percentage: 0.03),
                     ),
@@ -56,8 +59,7 @@ class CalculatorPageView extends StatelessWidget {
                       '   Weight of package*',
                       maxFontSize: 24,
                       minFontSize: 18,
-                      style: TextStyle(
-                          color: AppColor.appColorCornflowerBlue),
+                      style: TextStyle(color: AppColor.appColorCornflowerBlue),
                     ),
                     Padding(
                       padding: EdgeInsets.only(
@@ -68,23 +70,23 @@ class CalculatorPageView extends StatelessWidget {
                       child: Row(
                         children: [
                           SizedBox(
-                            height:
-                                customHeight(context, percentage: 0.08),
+                            height: customHeight(context, percentage: 0.08),
                             width: customWidth(context, percentage: 0.4),
                             child: TextField(
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                      decimal: true),
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.horizontal(
-                                    left: Radius.circular(
-                                        customWidth(context)),
-                                    right: Radius.circular(
-                                        customWidth(context)),
+                                    left: Radius.circular(customWidth(context)),
+                                    right:
+                                        Radius.circular(customWidth(context)),
                                   ),
                                   borderSide: BorderSide(
                                     width: customHeight(context,
                                         percentage: 0.003),
-                                    color:
-                                        AppColor.appColorCornflowerBlue,
+                                    color: AppColor.appColorCornflowerBlue,
                                   ),
                                 ),
                                 alignLabelWithHint: true,
@@ -93,85 +95,96 @@ class CalculatorPageView extends StatelessWidget {
                                     color: AppColor.appColorGreylight),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.horizontal(
-                                    left: Radius.circular(
-                                        customWidth(context)),
-                                    right: Radius.circular(
-                                        customWidth(context)),
+                                    left: Radius.circular(customWidth(context)),
+                                    right:
+                                        Radius.circular(customWidth(context)),
                                   ),
                                 ),
                               ),
                             ),
                           ),
                           SizedBox(
-                            height:
-                                customHeight(context, percentage: 0.06),
+                            height: customHeight(context, percentage: 0.06),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment:
-                                  CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(
-                                  height: customHeight(context,
-                                      percentage: 0.03),
+                                  height:
+                                      customHeight(context, percentage: 0.03),
                                   child: Row(
                                     children: [
                                       Radio(
-                                        focusColor:
-                                            AppColor.appColorGreyNormal,
+                                        focusColor: AppColor.appColorGreyNormal,
                                         activeColor:
                                             AppColor.appColorGreyNormal,
-                                        overlayColor:
-                                            MaterialStateProperty.all(
-                                                AppColor
-                                                    .appColorGreyNormal),
-                                        fillColor:
-                                            MaterialStateProperty.all(
-                                                AppColor
-                                                    .appColorGreyNormal),
+                                        overlayColor: MaterialStateProperty.all(
+                                            AppColor.appColorGreyNormal),
+                                        fillColor: MaterialStateProperty
+                                            .resolveWith<Color>((states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return AppColor
+                                                .appColorAccentRed; // Sets the color of the circle when it's selected to red
+                                          }
+                                          return AppColor
+                                              .appColorGreyNormal; // Sets the color of the circle when it's not selected
+                                        }),
                                         value: true,
-                                        groupValue: null,
-                                        onChanged: (value) {},
+                                        groupValue: model.weightRadioButton,
+                                        onChanged: (value) {
+                                          model.weightRadioButton =
+                                              !model.weightRadioButton;
+                                          print('kg $value');
+                                          model.notifyListeners();
+                                        },
                                       ),
                                       const AutoSizeText(
                                         'kg',
                                         maxFontSize: 14,
                                         minFontSize: 14,
                                         style: TextStyle(
-                                            color: AppColor
-                                                .appColorGreyNormal),
+                                            color: AppColor.appColorGreyNormal),
                                       )
                                     ],
                                   ),
                                 ),
                                 SizedBox(
-                                  height: customHeight(context,
-                                      percentage: 0.03),
+                                  height:
+                                      customHeight(context, percentage: 0.03),
                                   child: Row(
                                     children: [
                                       Radio(
-                                        focusColor:
-                                            AppColor.appColorGreyNormal,
+                                        focusColor: AppColor.appColorGreyNormal,
                                         activeColor:
                                             AppColor.appColorGreyNormal,
-                                        overlayColor:
-                                            MaterialStateProperty.all(
-                                                AppColor
-                                                    .appColorGreyNormal),
-                                        fillColor:
-                                            MaterialStateProperty.all(
-                                                AppColor
-                                                    .appColorGreyNormal),
+                                        overlayColor: MaterialStateProperty.all(
+                                            AppColor.appColorGreyNormal),
+                                        fillColor: MaterialStateProperty
+                                            .resolveWith<Color>((states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return AppColor
+                                                .appColorAccentRed; // Sets the color of the circle when it's selected to red
+                                          }
+                                          return AppColor
+                                              .appColorGreyNormal; // Sets the color of the circle when it's not selected
+                                        }),
                                         value: true,
-                                        groupValue: null,
-                                        onChanged: (value) {},
+                                        groupValue: !model.weightRadioButton,
+                                        onChanged: (value) {
+                                          model.weightRadioButton =
+                                              !model.weightRadioButton;
+                                          print('lb $value');
+                                          model.notifyListeners();
+                                        },
                                       ),
                                       const AutoSizeText(
                                         'lb',
                                         maxFontSize: 14,
                                         minFontSize: 14,
                                         style: TextStyle(
-                                            color: AppColor
-                                                .appColorGreyNormal),
+                                            color: AppColor.appColorGreyNormal),
                                       )
                                     ],
                                   ),
@@ -182,8 +195,9 @@ class CalculatorPageView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Gap(customHeight(context,percentage: 0.013)),
-                    customRequestButton(context,'Send Shipment',()=> model.generalRequester()),
+                    Gap(customHeight(context, percentage: 0.013)),
+                    customRequestButton(context, 'Send Shipment',
+                        () => model.generalRequester(pagename: 'Calculator')),
                   ],
                 ))));
   }

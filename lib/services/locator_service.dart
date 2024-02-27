@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 
 import '../views/wrapper_view/wrapper_view_model.dart';
 import 'api_service.dart';
+import 'calculator_services.dart';
 import 'shared_preferences_service.dart';
 import 'user_service.dart';
 
@@ -14,6 +15,7 @@ void setupLocator() {
   locator.registerLazySingleton<UserService>(() => UserService());
   locator.registerLazySingleton<WrapperViewModel>(() => WrapperViewModel());
   locator.registerLazySingleton<SharedPreferenceService>(() => SharedPreferenceService());
+  locator.registerLazySingleton<CalculatorServices>(() => CalculatorServices());
 
 
   // Register models

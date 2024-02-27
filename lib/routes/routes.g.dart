@@ -10,6 +10,8 @@ List<RouteBase> get $appRoutes => [
       $wrapperRoute,
       $welcomePageViewRoute,
       $homePageViewRoute,
+      $homeManagerPageViewRoute,
+      $homeEmployeePageViewRoute,
       $loginPageViewRoute,
       $shipmentsPageViewRoute,
       $calculatorPageViewRoute,
@@ -74,6 +76,52 @@ extension $HomePageViewRouteExtension on HomePageViewRoute {
 
   String get location => GoRouteData.$location(
         '/home_page_view_path',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $homeManagerPageViewRoute => GoRouteData.$route(
+      path: '/home_manager_page_view_path',
+      factory: $HomeManagerPageViewRouteExtension._fromState,
+    );
+
+extension $HomeManagerPageViewRouteExtension on HomeManagerPageViewRoute {
+  static HomeManagerPageViewRoute _fromState(GoRouterState state) =>
+      const HomeManagerPageViewRoute();
+
+  String get location => GoRouteData.$location(
+        '/home_manager_page_view_path',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $homeEmployeePageViewRoute => GoRouteData.$route(
+      path: '/home_employee_page_view_path',
+      factory: $HomeEmployeePageViewRouteExtension._fromState,
+    );
+
+extension $HomeEmployeePageViewRouteExtension on HomeEmployeePageViewRoute {
+  static HomeEmployeePageViewRoute _fromState(GoRouterState state) =>
+      const HomeEmployeePageViewRoute();
+
+  String get location => GoRouteData.$location(
+        '/home_employee_page_view_path',
       );
 
   void go(BuildContext context) => context.go(location);
