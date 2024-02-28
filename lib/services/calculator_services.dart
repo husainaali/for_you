@@ -41,4 +41,34 @@ class CalculatorServices {
       throw Exception('Failed to load data');
     }
   }
+
+ Future<bool> getShipmentMethods(fromCountryID, toCountryID, type) async {
+  bool status = false;
+  final String apiUrl = AppConfig.appBaseUrl + AppConfig.getShipmentMethod;
+  
+  // Encode the request body to JSON
+  var body = json.encode({
+    'shippingType': type,
+    'fromCountryId': '$fromCountryID',
+    'toCountryId': '$toCountryID',
+  });
+  
+  final response = await http.post(
+    Uri.parse(apiUrl),
+    headers: {'Content-Type': 'application/json'}, // Set Content-Type header
+    body: body,
+  );
+
+  if (response.statusCode == 200) {
+    var data = json.decode(response.body);
+    if (data != null && data.isNotEmpty) {
+      // Process data if needed
+    }
+    status = true; // Update status if request is successful
+  } else {
+    throw Exception('Failed to load data');
+  }
+  
+  return status;
+}
 }

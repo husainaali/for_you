@@ -17,6 +17,7 @@ class AppConfig {
   static const registerManagerData = "manager_register.php";
   
   static const getCountriesCitiesData = "get_countries_cities.php";
+  static const getShipmentMethod = "get_shipment_method.php";
 
 
 }

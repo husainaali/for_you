@@ -71,39 +71,7 @@ class SendShipmentPageView extends StatelessWidget {
                           2,
                           leadingIcon,
                           actionIcon),
-                      Gap(customHeight(context, percentage: 0.02)),
-                      customTitleLable('Shipping service type'),
-                      Row(
-                        children: List.generate(
-                          2,
-                          (index) => SizedBox(
-                            height: customHeight(context, percentage: 0.03),
-                            child: Row(
-                              children: [
-                                Radio(
-                                  focusColor: AppColor.appColorGreyNormal,
-                                  activeColor: AppColor.appColorGreyNormal,
-                                  overlayColor: MaterialStateProperty.all(
-                                      AppColor.appColorGreyNormal),
-                                  fillColor: MaterialStateProperty.all(
-                                      AppColor.appColorGreyNormal),
-                                  value: true,
-                                  toggleable: true,
-                                  groupValue: null,
-                                  onChanged: (value) {},
-                                ),
-                                AutoSizeText(
-                                  index == 0 ? 'kg' : 'lb',
-                                  maxFontSize: 14,
-                                  minFontSize: 14,
-                                  style: const TextStyle(
-                                      color: AppColor.appColorGreyNormal),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                      
                       Gap(customHeight(context, percentage: 0.02)),
                       customTitleLable('Dropping time'),
                       SizedBox(

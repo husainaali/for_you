@@ -29,7 +29,7 @@ class CalculatorPageView extends StatelessWidget {
                       left: customWidth(context, percentage: 0.05),
                       right: customWidth(context, percentage: 0.05)),
                   children: [
-                    AutoSizeText(
+                    const AutoSizeText(
                       '   Shipment from*',
                       maxFontSize: 24,
                       minFontSize: 18,
@@ -42,7 +42,7 @@ class CalculatorPageView extends StatelessWidget {
                     Gap(
                       customHeight(context, percentage: 0.03),
                     ),
-                    AutoSizeText(
+                    const AutoSizeText(
                       '   Shipment to*',
                       maxFontSize: 24,
                       minFontSize: 18,
@@ -55,7 +55,7 @@ class CalculatorPageView extends StatelessWidget {
                     Gap(
                       customHeight(context, percentage: 0.03),
                     ),
-                    AutoSizeText(
+                    const AutoSizeText(
                       '   Weight of package*',
                       maxFontSize: 24,
                       minFontSize: 18,
@@ -194,6 +194,87 @@ class CalculatorPageView extends StatelessWidget {
                           )
                         ],
                       ),
+                    ),
+                    Gap(customHeight(context, percentage: 0.02)),
+                    customTitleLable('   Shipping service type'),
+                    Row(
+                      children: List.generate(
+                        2,
+                        (index) => SizedBox(
+                          height: customHeight(context, percentage: 0.03),
+                          child: Row(
+                            children: [
+                              Radio(
+                                focusColor: AppColor.appColorGreyNormal,
+                                activeColor: AppColor.appColorGreyNormal,
+                                overlayColor: MaterialStateProperty.all(
+                                    AppColor.appColorGreyNormal),
+                                fillColor:
+                                    MaterialStateProperty.resolveWith<Color>(
+                                        (states) {
+                                  if (states.contains(MaterialState.selected)) {
+                                    return AppColor.appColorAccentRed;
+                                  }
+                                  return AppColor
+                                      .appColorGreyNormal;
+                                }),
+                                value: true,
+                                toggleable: true,
+                                groupValue: index == 0
+                                    ? !model.shippingType
+                                    : model.shippingType,
+                                onChanged: (value) {
+                                  if (index == 0) {
+                                    print('fast $value');
+                                    model.shippingType = !model.shippingType;
+                                  } else {
+                                    model.shippingType = !model.shippingType;
+                                    print('normal $value');
+                                  }
+                                  model.notifyListeners();
+                                },
+                              ),
+                              AutoSizeText(
+                                index == 0 ? 'fast' : 'normal',
+                                maxFontSize: 14,
+                                minFontSize: 14,
+                                style: const TextStyle(
+                                    color: AppColor.appColorGreyNormal),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Gap(customHeight(context, percentage: 0.02)),
+                    const AutoSizeText(
+                      '   Shipping method*',
+                      maxFontSize: 24,
+                      minFontSize: 18,
+                      style: TextStyle(color: AppColor.appColorCornflowerBlue),
+                    ),
+                    SizedBox(
+                      width: customWidth(context),
+                      height: customHeight(context, percentage: 0.09),
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 4,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                                padding: EdgeInsets.only(
+                                    right:
+                                        customWidth(context, percentage: 0.02),
+                                    top:
+                                        customHeight(context, percentage: 0.02),
+                                    bottom: customHeight(context,
+                                        percentage: 0.001)),
+                                child: customTimeItem(
+                                    context,
+                                    index == 1
+                                        ? AppColor.appColorCornflowerBlue
+                                        : AppColor.appColorGreyNormal,
+                                    '08:30 am 03 Feb 2024'));
+                          }),
                     ),
                     Gap(customHeight(context, percentage: 0.013)),
                     customRequestButton(context, 'Send Shipment',

@@ -23,6 +23,8 @@ class CalculatorPageViewModel extends BaseModel {
 
   bool weightRadioButton = true;
 
+  bool shippingType =true;
+
   List<Country> get countryList => _countryList.value;
   List<City> get fromCities => _fromCities.value;
   List<City> get toCities => _toCities.value;
@@ -31,6 +33,7 @@ class CalculatorPageViewModel extends BaseModel {
     context = calculatorContext;
     setBusy(true);
     await getCountries();
+    await _calculatorServices.getShipmentMethods(1,1,'normal');
     setBusy(false);
   }
 
