@@ -33,7 +33,7 @@ class CalculatorPageViewModel extends BaseModel {
     context = calculatorContext;
     setBusy(true);
     await getCountries();
-    await _calculatorServices.getShipmentMethods(1,1,'normal');
+    // await _calculatorServices.getShipmentMethods('1','1','normal');
     setBusy(false);
   }
 

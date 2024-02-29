@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 import 'package:for_you/models/countries.dart';
 import 'package:http/http.dart' as http;
 import 'package:stacked/stacked.dart';
@@ -42,33 +41,30 @@ class CalculatorServices {
     }
   }
 
- Future<bool> getShipmentMethods(fromCountryID, toCountryID, type) async {
-  bool status = false;
-  final String apiUrl = AppConfig.appBaseUrl + AppConfig.getShipmentMethod;
-  
-  // Encode the request body to JSON
-  var body = json.encode({
-    'shippingType': type,
-    'fromCountryId': '$fromCountryID',
-    'toCountryId': '$toCountryID',
-  });
-  
-  final response = await http.post(
-    Uri.parse(apiUrl),
-    headers: {'Content-Type': 'application/json'}, // Set Content-Type header
-    body: body,
-  );
+  Future<bool> getShipmentMethods(
+      String fromCountryID, String toCountryID, String type) async {
+    bool status = false;
+    final String apiUrl = AppConfig.appBaseUrl + AppConfig.getShipmentMethod;
 
-  if (response.statusCode == 200) {
-    var data = json.decode(response.body);
-    if (data != null && data.isNotEmpty) {
-      // Process data if needed
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      body: {
+        'shippingType': type,
+        'fromCountryId': fromCountryID,
+        'toCountryId': toCountryID,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+      if (data != null && data.isNotEmpty) {
+        // Process data if needed
+      }
+      status = true; // Update status if request is successful
+    } else {
+      throw Exception('Failed to load data');
     }
-    status = true; // Update status if request is successful
-  } else {
-    throw Exception('Failed to load data');
+
+    return status;
   }
-  
-  return status;
-}
 }
