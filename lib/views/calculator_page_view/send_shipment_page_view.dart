@@ -2,14 +2,16 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:for_you/constants/constants_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:for_you/models/send_shipment_details.dart';
 import 'package:gap/gap.dart';
 import 'package:stacked/stacked.dart';
 import '../../widgets/custom_widget_helper.dart';
 import 'calculator_page_view_model.dart';
 
 class SendShipmentPageView extends StatelessWidget {
-  SendShipmentPageView({super.key});
-
+  
+  SendShipmentPageView({super.key, required this.sendShipmentDetails});
+  final SendShipmentDetails sendShipmentDetails;
   final Icon leadingIcon =
       const Icon(Icons.home, color: AppColor.appColorCornflowerBlue);
   final IconButton actionIcon = IconButton(
@@ -18,7 +20,7 @@ class SendShipmentPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CalculatorPageViewModel>.reactive(
         viewModelBuilder: () => CalculatorPageViewModel(),
-        onViewModelReady: (model) => model.sendShipmentInitialize(context),
+        onViewModelReady: (model) => model.sendShipmentInitialize(context,sendShipmentDetails),
         builder: (context, model, child) => Scaffold(
             appBar: customShortAppBar(context),
             backgroundColor: AppColor.appColorWhite,
@@ -30,9 +32,9 @@ class SendShipmentPageView extends StatelessWidget {
                         left: customWidth(context, percentage: 0.05),
                         right: customWidth(context, percentage: 0.05)),
                     children: [
-                      const Center(
+                      Center(
                         child: AutoSizeText(
-                          '5.600 BHD',
+                         '${model.totalPrice(model.sendShipmentDetails.rate!)}00 BHD',
                           maxFontSize: 42,
                           minFontSize: 40,
                           style: TextStyle(
@@ -89,12 +91,12 @@ class SendShipmentPageView extends StatelessWidget {
                                           percentage: 0.02),
                                       bottom: customHeight(context,
                                           percentage: 0.001)),
-                                  child: customTimeItem(
+                                  child: customHorizontalListItem(
                                       context,
                                       index == 1
                                           ? AppColor.appColorCornflowerBlue
                                           : AppColor.appColorGreyNormal,
-                                      '08:30 am 03 Feb 2024'));
+                                      '08:30 am 03 Feb 2024',index,model,'droppingTime'));
                             }),
                       ),
                       Gap(customHeight(context, percentage: 0.02)),

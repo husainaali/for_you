@@ -52,7 +52,6 @@ customDropDownMenu(context, list, listName, CalculatorPageViewModel model,
           left: Radius.circular(customHeight(context, percentage: 0.04)),
           right: Radius.circular(customHeight(context, percentage: 0.04)),
         ),
-
         style: TextStyle(color: AppColor.appColorCornflowerBlue),
         items: listName == 'FromCountry' || listName == 'ToCountry'
             ? list.map<DropdownMenuItem<String>>((Country country) {
@@ -68,9 +67,27 @@ customDropDownMenu(context, list, listName, CalculatorPageViewModel model,
                 );
               }).toList(),
         onChanged: (String? value) {
+          int? itemID;
+          if (listName == 'FromCountry' || listName == 'ToCountry') {
+            itemID = list
+                .firstWhere((element) => element.countryName == value)
+                .countryId;
+          } else {
+            itemID =
+                list.firstWhere((element) => element.cityName == value).cityId;
+          }
           model.selectCountry(listName, value);
           print(value);
           print(listName);
+          if (listName == 'FromCountry') {
+            model.shipmentInformation(itemID, 'countryFromId');
+          } else if (listName == 'ToCountry') {
+            model.shipmentInformation(itemID, 'countryToId');
+          } else if (listName == 'FromCity') {
+            model.shipmentInformation(itemID, 'cityFromID');
+          } else if (listName == 'ToCity') {
+            model.shipmentInformation(itemID, 'cityToId');
+          }
         },
       ),
     ),

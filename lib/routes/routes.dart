@@ -130,7 +130,9 @@ class SendShipmentPageViewRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return SendShipmentPageView();
+        Map data = state.extra as Map;
+
+    return SendShipmentPageView(sendShipmentDetails: data['sendShipmentDetails'],);
   }
 }
 @TypedGoRoute<SettingPageViewRoute>(path: SettingPageViewRoute.path)

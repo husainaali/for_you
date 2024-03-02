@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:for_you/models/countries.dart';
+import 'package:for_you/models/shipment_methods.dart';
 import 'package:http/http.dart' as http;
 import 'package:stacked/stacked.dart';
 
@@ -7,8 +8,12 @@ import '../constants/constants_helper.dart';
 
 class CalculatorServices {
   final ReactiveValue<List<Country>> _countries = ReactiveValue([]);
+  final ReactiveValue<List<ShippingMethods>> _shipmentMethods =
+      ReactiveValue([]);
 
   List<Country>? get countries => _countries.value;
+
+  List<ShippingMethods>? get shipmentMethods => _shipmentMethods.value;
 
   Future<bool> getAllCountriesAndCities() async {
     bool status = false;
@@ -45,7 +50,8 @@ class CalculatorServices {
       String fromCountryID, String toCountryID, String type) async {
     bool status = false;
     final String apiUrl = AppConfig.appBaseUrl + AppConfig.getShipmentMethod;
-
+    var tempMethodsList = <ShippingMethods>[];
+    _shipmentMethods.value.clear();
     final response = await http.post(
       Uri.parse(apiUrl),
       body: {
@@ -58,7 +64,12 @@ class CalculatorServices {
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       if (data != null && data.isNotEmpty) {
-        // Process data if needed
+        for (var items in data) {
+          ShippingMethods tempShipmentMethods = ShippingMethods();
+          tempShipmentMethods = ShippingMethods.fromJson(items);
+          tempMethodsList.add(tempShipmentMethods);
+        }
+        _shipmentMethods.value.addAll(tempMethodsList);
       }
       status = true; // Update status if request is successful
     } else {

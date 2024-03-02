@@ -3,7 +3,7 @@ part of 'custom_widget_helper.dart';
 customPicker(context, title, address, backgroundColor, height, maxLine,
     leadingIcon, actionIcon) {
   return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      title==''?customTitleLable(title):SizedBox(),
+      title!=''?customTitleLable(title):SizedBox(),
     Gap(customHeight(context, percentage: 0.01)),
     SizedBox(
       height: customHeight(context, percentage: height),
