@@ -11,8 +11,9 @@ import 'calculator_page_view_model.dart';
 part 'custom_calculator_parts.dart';
 
 class CalculatorPageView extends StatelessWidget {
-  const CalculatorPageView({super.key});
-
+  CalculatorPageView({super.key});
+  final Icon leadingIcon =
+      const Icon(Icons.home, color: AppColor.appColorCornflowerBlue);
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CalculatorPageViewModel>.reactive(
@@ -35,9 +36,25 @@ class CalculatorPageView extends StatelessWidget {
                       minFontSize: 18,
                       style: TextStyle(color: AppColor.appColorCornflowerBlue),
                     ),
-                    customDropDownMenu(
+                    // customPicker(
+                    //   context,
+                    //   '   Pick up address',
+                    //   'Ahmed - salmabad building 1234 road 321 block 12',
+                    //   AppColor.appColorCornflowerBlueLight,
+                    //   0.1,
+                    //   5,
+                    //   leadingIcon,
+                    //   model,
+                    //   'address',
+                    //  actionButton:  IconButton(
+                    //       onPressed: () {
+                    //         // context.push(AddressesControlPageViewRoute.path,extra: {'addressId':null});
+                    //       },
+                    //       icon: SvgPicture.asset('assets/edit_icon.svg')),
+                    // ),
+                    customDropDownMenuCalculatorPage(
                         context, model.countryList, 'FromCountry', model),
-                    customDropDownMenu(
+                    customDropDownMenuCalculatorPage(
                         context, model.fromCities, 'FromCity', model),
                     Gap(
                       customHeight(context, percentage: 0.03),
@@ -48,9 +65,9 @@ class CalculatorPageView extends StatelessWidget {
                       minFontSize: 18,
                       style: TextStyle(color: AppColor.appColorCornflowerBlue),
                     ),
-                    customDropDownMenu(
+                    customDropDownMenuCalculatorPage(
                         context, model.countryList, 'ToCountry', model),
-                    customDropDownMenu(
+                    customDropDownMenuCalculatorPage(
                         context, model.toCities, 'ToCity', model),
                     Gap(
                       customHeight(context, percentage: 0.03),

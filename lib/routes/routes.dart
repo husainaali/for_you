@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../views/calculator_page_view/addresses_control_page.dart';
 import '../views/calculator_page_view/calculator_page_view.dart';
 import '../views/calculator_page_view/send_shipment_page_view.dart';
 import '../views/home_employee/home_manager_page_view.dart';
@@ -13,10 +14,7 @@ import '../views/shipments_view/shipments_page_view.dart';
 import '../views/welcome_view/welcome_page_view.dart';
 import '../views/wrapper_view/wrapper_view.dart';
 
-
 part 'routes.g.dart';
-
-
 
 GoRouter router() {
   return GoRouter(
@@ -30,8 +28,6 @@ GoRouter router() {
   );
 }
 
-
-
 @TypedGoRoute<WrapperRoute>(path: WrapperRoute.path)
 class WrapperRoute extends GoRouteData {
   const WrapperRoute();
@@ -44,7 +40,6 @@ class WrapperRoute extends GoRouteData {
   }
 }
 
-
 @TypedGoRoute<WelcomePageViewRoute>(path: WelcomePageViewRoute.path)
 class WelcomePageViewRoute extends GoRouteData {
   const WelcomePageViewRoute();
@@ -56,6 +51,7 @@ class WelcomePageViewRoute extends GoRouteData {
     return WelcomePageView();
   }
 }
+
 @TypedGoRoute<HomePageViewRoute>(path: HomePageViewRoute.path)
 class HomePageViewRoute extends GoRouteData {
   const HomePageViewRoute();
@@ -67,6 +63,7 @@ class HomePageViewRoute extends GoRouteData {
     return HomePageView();
   }
 }
+
 @TypedGoRoute<HomeManagerPageViewRoute>(path: HomeManagerPageViewRoute.path)
 class HomeManagerPageViewRoute extends GoRouteData {
   const HomeManagerPageViewRoute();
@@ -78,6 +75,7 @@ class HomeManagerPageViewRoute extends GoRouteData {
     return HomeManagerPageView();
   }
 }
+
 @TypedGoRoute<HomeEmployeePageViewRoute>(path: HomeEmployeePageViewRoute.path)
 class HomeEmployeePageViewRoute extends GoRouteData {
   const HomeEmployeePageViewRoute();
@@ -89,6 +87,7 @@ class HomeEmployeePageViewRoute extends GoRouteData {
     return HomeEmployeePageView();
   }
 }
+
 @TypedGoRoute<LoginPageViewRoute>(path: LoginPageViewRoute.path)
 class LoginPageViewRoute extends GoRouteData {
   const LoginPageViewRoute();
@@ -100,6 +99,7 @@ class LoginPageViewRoute extends GoRouteData {
     return LoginPageView();
   }
 }
+
 @TypedGoRoute<ShipmentsPageViewRoute>(path: ShipmentsPageViewRoute.path)
 class ShipmentsPageViewRoute extends GoRouteData {
   const ShipmentsPageViewRoute();
@@ -111,6 +111,7 @@ class ShipmentsPageViewRoute extends GoRouteData {
     return ShipmentsPageView();
   }
 }
+
 @TypedGoRoute<CalculatorPageViewRoute>(path: CalculatorPageViewRoute.path)
 class CalculatorPageViewRoute extends GoRouteData {
   const CalculatorPageViewRoute();
@@ -122,6 +123,7 @@ class CalculatorPageViewRoute extends GoRouteData {
     return CalculatorPageView();
   }
 }
+
 @TypedGoRoute<SendShipmentPageViewRoute>(path: SendShipmentPageViewRoute.path)
 class SendShipmentPageViewRoute extends GoRouteData {
   const SendShipmentPageViewRoute();
@@ -130,11 +132,14 @@ class SendShipmentPageViewRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-        Map data = state.extra as Map;
+    Map data = state.extra as Map;
 
-    return SendShipmentPageView(sendShipmentDetails: data['sendShipmentDetails'],);
+    return SendShipmentPageView(
+      sendShipmentDetails: data['sendShipmentDetails'],
+    );
   }
 }
+
 @TypedGoRoute<SettingPageViewRoute>(path: SettingPageViewRoute.path)
 class SettingPageViewRoute extends GoRouteData {
   const SettingPageViewRoute();
@@ -146,6 +151,7 @@ class SettingPageViewRoute extends GoRouteData {
     return SettingPageView();
   }
 }
+
 @TypedGoRoute<RegistrationPageViewRoute>(path: RegistrationPageViewRoute.path)
 class RegistrationPageViewRoute extends GoRouteData {
   const RegistrationPageViewRoute();
@@ -154,11 +160,28 @@ class RegistrationPageViewRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-        Map data = state.extra as Map;
+    Map data = state.extra as Map;
 
     return RegistrationPageView(
-            userName: data['userName'],
+      userName: data['userName'],
       password: data['password'],
+    );
+  }
+}
+
+@TypedGoRoute<AddressesControlPageViewRoute>(
+    path: AddressesControlPageViewRoute.path)
+class AddressesControlPageViewRoute extends GoRouteData {
+  const AddressesControlPageViewRoute();
+
+  static const path = '/addresses_control_view_path';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+        Map data = state.extra as Map;
+
+    return  AddressesControlPageView(
+      addressId: data['addressId']??-1,
 
     );
   }

@@ -1,9 +1,10 @@
 part of 'custom_widget_helper.dart';
 
-customPicker(context, title, address, backgroundColor, height, maxLine,
-    leadingIcon, actionIcon) {
+customPicker(BuildContext context, title, address, backgroundColor, height,
+    maxLine, leadingIcon, model, requestName,
+    {actionButton}) {
   return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      title!=''?customTitleLable(title):SizedBox(),
+    title != '' ? customTitleLable(title) : SizedBox(),
     Gap(customHeight(context, percentage: 0.01)),
     SizedBox(
       height: customHeight(context, percentage: height),
@@ -18,7 +19,13 @@ customPicker(context, title, address, backgroundColor, height, maxLine,
               BorderSide(color: AppColor.appColorCornflowerBlue)),
           backgroundColor: MaterialStateProperty.all(backgroundColor),
         ),
-        onPressed: () {},
+        onPressed: () {
+          // if (requestName == 'pickUpAddress' || requestName == 'dropAddress') {
+
+          //   context.push(AddressesControlPageViewRoute.path,
+          //       extra: {'addressId': null});
+          // }
+        },
         child: Row(
           children: [
             leadingIcon,
@@ -36,7 +43,7 @@ customPicker(context, title, address, backgroundColor, height, maxLine,
               ),
             ),
             Spacer(),
-            actionIcon,
+            actionButton != null ? actionButton : SizedBox(),
           ],
         ),
       ),

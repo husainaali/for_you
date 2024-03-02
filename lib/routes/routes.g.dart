@@ -18,6 +18,7 @@ List<RouteBase> get $appRoutes => [
       $sendShipmentPageViewRoute,
       $settingPageViewRoute,
       $registrationPageViewRoute,
+      $addressesControlPageViewRoute,
     ];
 
 RouteBase get $wrapperRoute => GoRouteData.$route(
@@ -260,6 +261,30 @@ extension $RegistrationPageViewRouteExtension on RegistrationPageViewRoute {
 
   String get location => GoRouteData.$location(
         '/registration_page_view_path',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $addressesControlPageViewRoute => GoRouteData.$route(
+      path: '/addresses_control_view_path',
+      factory: $AddressesControlPageViewRouteExtension._fromState,
+    );
+
+extension $AddressesControlPageViewRouteExtension
+    on AddressesControlPageViewRoute {
+  static AddressesControlPageViewRoute _fromState(GoRouterState state) =>
+      const AddressesControlPageViewRoute();
+
+  String get location => GoRouteData.$location(
+        '/addresses_control_view_path',
       );
 
   void go(BuildContext context) => context.go(location);

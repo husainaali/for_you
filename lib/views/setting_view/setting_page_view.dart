@@ -36,9 +36,10 @@ class SettingPageView extends StatelessWidget {
                     0.1,
                     2,
                     SvgPicture.asset('assets/profile_icon.svg'),
-                    IconButton(
+                    
+                    model,'UserInfo',actionButton: IconButton(
                         onPressed: () {},
-                        icon: SvgPicture.asset('assets/edit_icon.svg'))),
+                        icon: SvgPicture.asset('assets/edit_icon.svg')),),
                 customPicker(
                     context,
                     '',
@@ -49,12 +50,14 @@ class SettingPageView extends StatelessWidget {
                     Icon(Icons.pin_drop,
                         color: AppColor.appColorCornflowerBlue,
                         size: customHeight(context, percentage: 0.045)),
-                    IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.arrow_forward_ios,
-                          color: AppColor.appColorCornflowerBlue,
-                        ))),
+                    
+                    model,'addresses',actionButton:  IconButton(
+                        onPressed: () {
+
+                                      context.push(AddressesControlPageViewRoute.path,extra: {'addressId':null});
+
+                        },
+                        icon: SvgPicture.asset('assets/edit_icon.svg')),),
                 customPicker(
                     context,
                     '',
@@ -65,11 +68,12 @@ class SettingPageView extends StatelessWidget {
                     Icon(Icons.notifications_none_outlined,
                         color: AppColor.appColorCornflowerBlue,
                         size: customHeight(context, percentage: 0.045)),
-                    Switch(
+                    
+                    model,'notifications',actionButton: Switch(
                       activeColor: AppColor.appColorCornflowerBlue,
                       value: true,
                       onChanged: (value) {},
-                    )),
+                    ),),
                 customPicker(
                     context,
                     '',
@@ -80,12 +84,13 @@ class SettingPageView extends StatelessWidget {
                     SvgPicture.asset('assets/support_icon.svg',
                         color: AppColor.appColorCornflowerBlue,
                         height: customHeight(context, percentage: 0.04)),
-                    IconButton(
+                    
+                    model,'help',actionButton:  IconButton(
                         onPressed: () {},
                         icon: const Icon(
                           Icons.arrow_forward_ios,
                           color: AppColor.appColorCornflowerBlue,
-                        ))),
+                        )),),
                 Gap(customHeight(context, percentage: 0.03)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

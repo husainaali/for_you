@@ -10,7 +10,9 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import '../constants/constants_helper.dart';
 import '../routes/routes.dart';
+import '../views/calculator_page_view/addresses_control_page.dart';
 import '../views/calculator_page_view/calculator_page_view.dart';
+import '../views/calculator_page_view/calculator_page_view_model.dart';
 import '../views/login_view/login_page_view.dart';
 import '../views/login_view/registration_page_view.dart';
 
@@ -23,3 +25,4 @@ part 'custom_picker.dart';
 part 'custom_title_lable.dart';
 part 'custom_time_item.dart';
 part 'custom_request_button.dart';
+part 'custom_dialog.dart';

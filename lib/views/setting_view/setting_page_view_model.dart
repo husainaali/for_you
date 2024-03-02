@@ -11,19 +11,18 @@ import '../../services/locator_service.dart';
 import '../../services/shared_preferences_service.dart';
 import '../../view_models/base_model.dart';
 
-
 class SettingPageViewModel extends BaseModel {
   final WrapperViewModel wrapperViewModel = locator.get<WrapperViewModel>();
-  final SharedPreferenceService _sharedPreferenceService = locator.get<SharedPreferenceService>();
+  final SharedPreferenceService _sharedPreferenceService =
+      locator.get<SharedPreferenceService>();
+  int selectedPickUpAdressIndex = 0;
+  initialize() {}
 
-      initialize() {}
+  logout(BuildContext context) {
+    _sharedPreferenceService.removeData(AppString.isUserLogInKey);
 
-      logout(BuildContext context){
-                                     _sharedPreferenceService.removeData(AppString.isUserLogInKey);
-
-                        wrapperViewModel.selectedItem = 5;
-                        notifyListeners();
-                        context.go(LoginPageViewRoute.path); 
-      }
-
+    wrapperViewModel.selectedItem = 5;
+    notifyListeners();
+    context.go(LoginPageViewRoute.path);
+  }
 }

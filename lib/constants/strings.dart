@@ -5,5 +5,6 @@ class AppString {
 
 // shared preferences key
   static const isUserLogInKey = "is_user_login_key";
+  static const userData = "user_data";
   
 }

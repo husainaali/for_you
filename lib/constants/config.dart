@@ -18,6 +18,8 @@ class AppConfig {
   
   static const getCountriesCitiesData = "get_countries_cities.php";
   static const getShipmentMethod = "get_shipment_method.php";
+  static const getAddresses = "get_my_address.php";
+  static const addUpdateAddress = "manage_address.php";
 
 
 }

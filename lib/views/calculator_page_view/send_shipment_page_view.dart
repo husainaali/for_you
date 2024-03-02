@@ -9,7 +9,6 @@ import '../../widgets/custom_widget_helper.dart';
 import 'calculator_page_view_model.dart';
 
 class SendShipmentPageView extends StatelessWidget {
-  
   SendShipmentPageView({super.key, required this.sendShipmentDetails});
   final SendShipmentDetails sendShipmentDetails;
   final Icon leadingIcon =
@@ -20,7 +19,8 @@ class SendShipmentPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CalculatorPageViewModel>.reactive(
         viewModelBuilder: () => CalculatorPageViewModel(),
-        onViewModelReady: (model) => model.sendShipmentInitialize(context,sendShipmentDetails),
+        onViewModelReady: (model) =>
+            model.sendShipmentInitialize(context, sendShipmentDetails),
         builder: (context, model, child) => Scaffold(
             appBar: customShortAppBar(context),
             backgroundColor: AppColor.appColorWhite,
@@ -34,7 +34,7 @@ class SendShipmentPageView extends StatelessWidget {
                     children: [
                       Center(
                         child: AutoSizeText(
-                         '${model.totalPrice(model.sendShipmentDetails.rate!)}00 BHD',
+                          '${model.totalPrice(model.sendShipmentDetails.rate!)}00 BHD',
                           maxFontSize: 42,
                           minFontSize: 40,
                           style: TextStyle(
@@ -44,36 +44,58 @@ class SendShipmentPageView extends StatelessWidget {
                       ),
                       Gap(customHeight(context, percentage: 0.02)),
                       customPicker(
-                          context,
-                          '   Pick up address',
-                          'Ahmed - salmabad building 1234 road 321 block 12',
-                          AppColor.appColorCornflowerBlueLight,
-                          0.1,
-                          2,
-                          leadingIcon,
-                          actionIcon),
+                        context,
+                        '   Pick up address',
+                        'Ahmed - salmabad building 1234 road 321 block 12',
+                        AppColor.appColorCornflowerBlueLight,
+                        0.1,
+                        2,
+                        leadingIcon,
+                        model,
+                        'pickUpAddress',
+                        actionButton: IconButton(
+                            onPressed: () {
+
+                              customAddressDialog(context: context, model: model,requestName: "PickupAddress");
+                              // context.push(AddressesControlPageViewRoute.path,extra: {'addressId':null});
+                            },
+                            icon: SvgPicture.asset('assets/edit_icon.svg')),
+                      ),
                       Gap(customHeight(context, percentage: 0.02)),
                       customPicker(
-                          context,
-                          '   Pick up date and time',
-                          '08:30 am - 02 Feb 2024',
-                          AppColor.appColorWhite,
-                          0.07,
-                          1,
-                          const Icon(Icons.calendar_month_outlined,
-                              color: AppColor.appColorCornflowerBlue),
-                          actionIcon),
+                        context,
+                        '   Pick up date and time',
+                        '08:30 am - 02 Feb 2024',
+                        AppColor.appColorWhite,
+                        0.07,
+                        1,
+                        const Icon(Icons.calendar_month_outlined,
+                            color: AppColor.appColorCornflowerBlue),
+                        model,
+                        'pickupDateTime',
+                        actionButton: IconButton(
+                            onPressed: () {
+                              // context.push(AddressesControlPageViewRoute.path,extra: {'addressId':null});
+                            },
+                            icon: SvgPicture.asset('assets/edit_icon.svg')),
+                      ),
                       Gap(customHeight(context, percentage: 0.02)),
                       customPicker(
-                          context,
-                          '   Dropping address',
-                          'Ahmed - salmabad building 1234 road 321 block 12',
-                          AppColor.appColorCornflowerBlueLight,
-                          0.1,
-                          2,
-                          leadingIcon,
-                          actionIcon),
-                      
+                        context,
+                        '   Dropping address',
+                        'Ahmed - salmabad building 1234 road 321 block 12',
+                        AppColor.appColorCornflowerBlueLight,
+                        0.1,
+                        2,
+                        leadingIcon,
+                        model,
+                        'DropAddress',
+                        actionButton: IconButton(
+                            onPressed: () {
+                              customAddressDialog(context: context, model: model,requestName:'DropAddress');
+                            },
+                            icon: SvgPicture.asset('assets/edit_icon.svg')),
+                      ),
                       Gap(customHeight(context, percentage: 0.02)),
                       customTitleLable('Dropping time'),
                       SizedBox(
@@ -96,15 +118,18 @@ class SendShipmentPageView extends StatelessWidget {
                                       index == 1
                                           ? AppColor.appColorCornflowerBlue
                                           : AppColor.appColorGreyNormal,
-                                      '08:30 am 03 Feb 2024',index,model,'droppingTime'));
+                                      '08:30 am 03 Feb 2024',
+                                      index,
+                                      model,
+                                      'droppingTime'));
                             }),
                       ),
                       Gap(customHeight(context, percentage: 0.02)),
                       customRequestButton(
                           context,
                           'Submit',
-                          () => model.generalRequester(
-                              pagename: 'SendShipment')),
+                          () =>
+                              model.generalRequester(pagename: 'SendShipment')),
                     ]))));
   }
 }

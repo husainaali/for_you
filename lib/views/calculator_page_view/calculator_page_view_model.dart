@@ -1,36 +1,43 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:for_you/models/addresses.dart';
 import 'package:for_you/models/send_shipment_details.dart';
 import 'package:for_you/models/shipment_methods.dart';
 import 'package:for_you/routes/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../constants/strings.dart';
 import '../../models/countries.dart';
+import '../../models/user.dart';
 import '../../services/calculator_services.dart';
 import '../../services/locator_service.dart';
+import '../../services/shared_preferences_service.dart';
 import '../../view_models/base_model.dart';
 
 class CalculatorPageViewModel extends BaseModel {
   final CalculatorServices _calculatorServices =
       locator.get<CalculatorServices>();
-
+  final SharedPreferenceService _sharedPreferenceService =
+      locator.get<SharedPreferenceService>();
   final ReactiveValue<List<Country>> _countryList = ReactiveValue([]);
   final ReactiveValue<List<City>> _fromCities = ReactiveValue([]);
   final ReactiveValue<List<City>> _toCities = ReactiveValue([]);
   final ReactiveValue<List<ShippingMethods>> _shippingMethods =
       ReactiveValue([]);
+  final ReactiveValue<List<Addresses>> _addresses = ReactiveValue([]);
+  final ReactiveValue<Addresses> _pickAddresses = ReactiveValue(Addresses());
+  final ReactiveValue<Addresses> _dropAddresses = ReactiveValue(Addresses());
 
   final ReactiveValue<SendShipmentDetails> _sendShipmentDetails =
       ReactiveValue(SendShipmentDetails());
 
   TextEditingController textControllerWeightCounter = TextEditingController();
 
-  var selectedCity;
-
   bool weightRadioButton = true;
-
+  bool addEditNewAddress = false;
   bool showShippingMethods = false;
 
   double? packageWeight = 0.0;
@@ -40,13 +47,36 @@ class CalculatorPageViewModel extends BaseModel {
   bool? shippingTypefast = null;
 
   int shippingMethodSelectedIndex = 0;
+  int selectedPickUpAdressIndex = 0;
 
   List<Country> get countryList => _countryList.value;
   List<City> get fromCities => _fromCities.value;
   List<City> get toCities => _toCities.value;
   List<ShippingMethods> get shippingMethods => _shippingMethods.value;
   SendShipmentDetails get sendShipmentDetails => _sendShipmentDetails.value;
+  List<Addresses> get addresses => _addresses.value;
+  Addresses get pickAddresses => _pickAddresses.value;
+  Addresses get dropAddresses => _dropAddresses.value;
+
+  
+  User? userData;
+
+  TextEditingController textControllerAddressName = TextEditingController();
+  TextEditingController textControllerAddressLine1 = TextEditingController();
+  TextEditingController textControllerAddressLine2 = TextEditingController();
   late BuildContext context;
+
+  Map<String, String> addressData = {
+    'userID': '',
+    'requestName': '',
+    'addressId': '',
+    'addressName': '',
+    'addressLine1': '',
+    'addressLine2': '',
+    'cityId': '',
+    'countryId': '',
+  };
+
   initialize(calculatorContext) async {
     textControllerWeightCounter.text = '0.0';
     context = calculatorContext;
@@ -59,9 +89,17 @@ class CalculatorPageViewModel extends BaseModel {
   }
 
   sendShipmentInitialize(
-      sendShipmentContext, SendShipmentDetails sendShipmentDetails) {
+      sendShipmentContext, SendShipmentDetails sendShipmentDetails) async {
     context = sendShipmentContext;
     _sendShipmentDetails.value = sendShipmentDetails;
+
+    var tempUserData =
+        await _sharedPreferenceService.getStringData(AppString.userData);
+    Map<String, dynamic> userInfo = json.decode(tempUserData);
+    userData = User.fromJson(userInfo);
+    addressData['userID'] = '${userData!.userId}';
+    print(userData!.userId);
+    getAddresses(userData!.userId);
   }
 
   Future getCountries() async {
@@ -73,9 +111,7 @@ class CalculatorPageViewModel extends BaseModel {
   }
 
   selectCountry(listName, selectedCoutryName) {
-    if (listName == 'FromCountry') {
-      selectedCity = null;
-
+    if (listName == 'FromCountry' || listName == 'AddressCountry') {
       _fromCities.value = [];
       _fromCities.value = countryList
               .where((element) => element.countryName == selectedCoutryName)
@@ -84,7 +120,7 @@ class CalculatorPageViewModel extends BaseModel {
           [];
       notifyListeners();
       // print(fromCities.last.cityName);
-    } else if (listName == 'ToCountry') {
+    } else if (listName == 'ToCountry' || listName == 'AddressCountry') {
       _toCities.value = [];
       _toCities.value = countryList
               .where((element) => element.countryName == selectedCoutryName)
@@ -243,9 +279,61 @@ class CalculatorPageViewModel extends BaseModel {
       weight = sendShipmentDetails.weight!;
     }
     weight = convertToNearestPointFive(weight);
-    sendShipmentDetails.calculatedWeight=weight;
-    sendShipmentDetails.rate=rate;
+    sendShipmentDetails.calculatedWeight = weight;
+    sendShipmentDetails.rate = rate;
     price = weight * rate;
     return double.parse(price.toStringAsFixed(1));
+  }
+
+  void changeToEditAddress() {
+    addEditNewAddress = !addEditNewAddress;
+    notifyListeners();
+  }
+
+  addressesControlPageInitialize(BuildContext context, addressId) async {
+    print('address id $addressId');
+    var tempUserData =
+        await _sharedPreferenceService.getStringData(AppString.userData);
+    Map<String, dynamic> userInfo = json.decode(tempUserData);
+    userData = User.fromJson(userInfo);
+    addressData['userID'] = '${userData!.userId}';
+    print(userData!.userId);
+    getAddresses(userData!.userId);
+    await getCountries();
+  }
+
+  Future<void> saveAddress() async {
+    await _calculatorServices
+        .addOrUpdateAddress(
+          userID: addressData['userID'] ?? '',
+          requestName: addressData['requestName'] ?? '',
+          addressId: addressData['addressId'] ?? '',
+          addressName: addressData['addressName'] ?? '',
+          addressLine1: addressData['addressLine1'] ?? '',
+          addressLine2: addressData['addressLine2'] ?? '',
+          cityId: addressData['cityId'] ?? '',
+          countryId: addressData['countryId'] ?? '',
+        )
+        .then((value) => {});
+  }
+
+  Future<void> getAddresses(userId) async {
+    _addresses.value.clear();
+    await _calculatorServices.getAddresses(userId).then((value) => {
+          if (value)
+            {
+              _addresses.value = _calculatorServices.addresses!,
+            }
+        });
+    notifyListeners();
+  }
+
+  String addressLableText(Addresses address) {
+    String addressText;
+
+    addressText =
+        '${address.addressName} - ${address.cityName}(${address.countryName})-${address.addressLine1}- ${address.addressLine2}';
+
+    return addressText;
   }
 }
