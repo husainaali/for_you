@@ -51,6 +51,8 @@ dependencies:
   flutter_animate: ^4.5.0
   timeline_tile: ^2.0.0
   json_annotation: ^4.8.1
+  flutter_map: ^6.1.0
+  latlong2: ^0.9.0
 
 dev_dependencies:
   flutter_test:

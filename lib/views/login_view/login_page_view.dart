@@ -60,7 +60,37 @@ class LoginPageView extends StatelessWidget {
                       ))
                 ],
               ),
-              Gap(customHeight(context, percentage: 0.04)),
+              model.isLoginPage?Align(
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  children: [
+                    Radio(
+                      focusColor: AppColor.appColorGreyNormal,
+                      activeColor: AppColor.appColorGreyNormal,
+                      overlayColor:
+                          MaterialStateProperty.all(AppColor.appColorGreyNormal),
+                      fillColor:
+                          MaterialStateProperty.resolveWith<Color>((states) {
+                        if (states.contains(MaterialState.selected)) {
+                          return AppColor.appColorAccentRed;
+                        }
+                        return AppColor.appColorGreyNormal;
+                      }),
+                      value: true,
+                      toggleable: true,
+                      groupValue: model.isServiceProvider,
+                      onChanged: (bool? value) {
+                        model.isServiceProvider = !model.isServiceProvider;
+                        model.notifyListeners();
+                      },
+                    ),
+                    Text(
+                      'Are you Service Manager?',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+              ):SizedBox(),
               TextField(
                 controller: model.textControllerUserEmail,
                 keyboardType: TextInputType.emailAddress,
@@ -138,15 +168,14 @@ class LoginPageView extends StatelessWidget {
                   model.isLoginPage ? 'Sign in' : 'Sign up',
                   model.isLoginPage
                       ? () {
-                          if (model.textControllerUserEmail.text.length>3&&model.textControllerUserPassword.text.length>3) {
+                          if (model.textControllerUserEmail.text.length > 3 &&
+                              model.textControllerUserPassword.text.length >
+                                  3) {
                             model.userService
                                 .loginUser(model.userInformation.email!,
                                     model.userInformation.password!)
                                 .then((value) => {
-                                      if (value)
-                                        {
-                                          context.go(WrapperRoute.path)
-                                        }
+                                      if (value) {context.go(WrapperRoute.path)}
                                     });
                           }
                         }

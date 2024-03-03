@@ -13,8 +13,13 @@ import '../routes/routes.dart';
 import '../views/calculator_page_view/addresses_control_page.dart';
 import '../views/calculator_page_view/calculator_page_view.dart';
 import '../views/calculator_page_view/calculator_page_view_model.dart';
+import '../views/employees_view/employees_page_view.dart';
+import '../views/home_employee/home_manager_page_view.dart';
+import '../views/home_manager/home_manager_page_view.dart';
 import '../views/login_view/login_page_view.dart';
 import '../views/login_view/registration_page_view.dart';
+import '../views/manager_view/manager_page_view.dart';
+import '../views/map_view/map_page_view.dart';
 
 
 part 'custom_bottom_navigation_bar.dart';

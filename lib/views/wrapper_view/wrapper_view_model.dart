@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:for_you/routes/routes.dart';
 import 'package:for_you/views/home_view/home_page_view.dart';
@@ -6,6 +8,7 @@ import 'package:for_you/views/wrapper_view/wrapper_view.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../constants/strings.dart';
+import '../../models/user.dart';
 import '../../services/locator_service.dart';
 import '../../services/shared_preferences_service.dart';
 import '../../view_models/base_model.dart';
@@ -16,6 +19,9 @@ class WrapperViewModel extends BaseModel {
   WrapperViewModel() {
     _loggedIn = false;
   }
+
+    User? userData;
+
   final SharedPreferenceService _sharedPreferenceService =
       locator.get<SharedPreferenceService>();
 
@@ -26,7 +32,11 @@ class WrapperViewModel extends BaseModel {
     setBusy(true);
 
     await login();
-
+    var tempUserData =
+        await _sharedPreferenceService.getStringData(AppString.userData);
+    Map<String, dynamic> userInfo = json.decode(tempUserData);
+    userData = User.fromJson(userInfo);
+    print(userData!.userId);
     setBusy(false);
     notifyListeners();
   }

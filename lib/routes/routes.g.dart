@@ -14,11 +14,13 @@ List<RouteBase> get $appRoutes => [
       $homeEmployeePageViewRoute,
       $loginPageViewRoute,
       $shipmentsPageViewRoute,
+      $shpmentDetailsViewRoute,
       $calculatorPageViewRoute,
       $sendShipmentPageViewRoute,
       $settingPageViewRoute,
       $registrationPageViewRoute,
       $addressesControlPageViewRoute,
+      $mapPageViewRoute,
     ];
 
 RouteBase get $wrapperRoute => GoRouteData.$route(
@@ -181,6 +183,29 @@ extension $ShipmentsPageViewRouteExtension on ShipmentsPageViewRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+RouteBase get $shpmentDetailsViewRoute => GoRouteData.$route(
+      path: '/shipments_details_view_path',
+      factory: $ShpmentDetailsViewRouteExtension._fromState,
+    );
+
+extension $ShpmentDetailsViewRouteExtension on ShpmentDetailsViewRoute {
+  static ShpmentDetailsViewRoute _fromState(GoRouterState state) =>
+      const ShpmentDetailsViewRoute();
+
+  String get location => GoRouteData.$location(
+        '/shipments_details_view_path',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 RouteBase get $calculatorPageViewRoute => GoRouteData.$route(
       path: '/calculator_page_view_path',
       factory: $CalculatorPageViewRouteExtension._fromState,
@@ -285,6 +310,29 @@ extension $AddressesControlPageViewRouteExtension
 
   String get location => GoRouteData.$location(
         '/addresses_control_view_path',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $mapPageViewRoute => GoRouteData.$route(
+      path: '/map_page_view_path',
+      factory: $MapPageViewRouteExtension._fromState,
+    );
+
+extension $MapPageViewRouteExtension on MapPageViewRoute {
+  static MapPageViewRoute _fromState(GoRouterState state) =>
+      const MapPageViewRoute();
+
+  String get location => GoRouteData.$location(
+        '/map_page_view_path',
       );
 
   void go(BuildContext context) => context.go(location);

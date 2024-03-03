@@ -84,7 +84,7 @@ customShipmentsList(context, model) {
             effects: const [FadeEffect()],
             child: GestureDetector(
               onTap: () {
-                
+                context.push(ShpmentDetailsViewRoute.path);
               },
               child: Padding(
                 padding: EdgeInsets.all(customHeight(context, percentage: 0.01)),

@@ -44,6 +44,8 @@ class LoginPageViewModel extends BaseModel {
   bool isUser = true;
 
   bool isPasswordConfirmed = false;
+
+  bool isServiceProvider = false;
   initialize() {}
   registrationInitialize(userName, password) {
     userInformation.email = userName;

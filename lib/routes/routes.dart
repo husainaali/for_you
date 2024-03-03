@@ -4,12 +4,16 @@ import 'package:go_router/go_router.dart';
 import '../views/calculator_page_view/addresses_control_page.dart';
 import '../views/calculator_page_view/calculator_page_view.dart';
 import '../views/calculator_page_view/send_shipment_page_view.dart';
+import '../views/employees_view/employees_page_view.dart';
 import '../views/home_employee/home_manager_page_view.dart';
 import '../views/home_manager/home_manager_page_view.dart';
 import '../views/home_view/home_page_view.dart';
 import '../views/login_view/login_page_view.dart';
 import '../views/login_view/registration_page_view.dart';
+import '../views/manager_view/manager_page_view.dart';
+import '../views/map_view/map_page_view.dart';
 import '../views/setting_view/setting_page_view.dart';
+import '../views/shipments_view/shipment_details_view.dart';
 import '../views/shipments_view/shipments_page_view.dart';
 import '../views/welcome_view/welcome_page_view.dart';
 import '../views/wrapper_view/wrapper_view.dart';
@@ -111,6 +115,17 @@ class ShipmentsPageViewRoute extends GoRouteData {
     return ShipmentsPageView();
   }
 }
+@TypedGoRoute<ShpmentDetailsViewRoute>(path: ShpmentDetailsViewRoute.path)
+class ShpmentDetailsViewRoute extends GoRouteData {
+  const ShpmentDetailsViewRoute();
+
+  static const path = '/shipments_details_view_path';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return ShpmentDetailsView();
+  }
+}
 
 @TypedGoRoute<CalculatorPageViewRoute>(path: CalculatorPageViewRoute.path)
 class CalculatorPageViewRoute extends GoRouteData {
@@ -183,6 +198,48 @@ class AddressesControlPageViewRoute extends GoRouteData {
     return  AddressesControlPageView(
       addressId: data['addressId']??-1,
 
+    );
+  }
+}
+@TypedGoRoute<MapPageViewRoute>(
+    path: MapPageViewRoute.path)
+class MapPageViewRoute extends GoRouteData {
+  const MapPageViewRoute();
+
+  static const path = '/map_page_view_path';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+
+    return  MapPageView(
+    );
+  }
+}
+@TypedGoRoute<ManagerPageViewRoute>(
+    path: ManagerPageViewRoute.path)
+class ManagerPageViewRoute extends GoRouteData {
+  const ManagerPageViewRoute();
+
+  static const path = '/manager_page_view_path';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+
+    return  ManagerPageView(
+    );
+  }
+}
+@TypedGoRoute<EmployeesPageViewRoute>(
+    path: EmployeesPageViewRoute.path)
+class EmployeesPageViewRoute extends GoRouteData {
+  const EmployeesPageViewRoute();
+
+  static const path = '/employees_page_view_path';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+
+    return  EmployeesPageView(
     );
   }
 }
