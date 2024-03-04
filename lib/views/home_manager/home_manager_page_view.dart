@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:for_you/constants/constants_helper.dart';
 // import 'package:for_you/widgets/custom_widget_helper.dart';
@@ -14,7 +15,7 @@ import 'package:stacked/stacked.dart';
 import '../../widgets/custom_widget_helper.dart';
 import 'home_manager_page_view_model.dart';
 
-// part 'custom_home_parts.dart';
+part 'custom_home_manager_parts.dart';
 
 class HomeManagerPageView extends StatelessWidget {
   const HomeManagerPageView({super.key});
@@ -25,12 +26,27 @@ class HomeManagerPageView extends StatelessWidget {
         viewModelBuilder: () => HomeManagerPageViewModel(),
         onViewModelReady: (model) => model.initialize(),
         builder: (context, model, child) => Scaffold(
-            appBar: customLongAppBar(context),
-            backgroundColor: AppColor.appColorWhite,
-            body: SafeArea(
-                child: ListView(
-                  children: [
-                  ],
-                ))));
+              appBar: customShortAppBarForManager(context,
+                  parentPage: 'home_manager',
+                  resources: SizedBox(
+                    width: customWidth(context),
+                    height: customWidth(context, percentage: 0.23),
+                    child: ListView.builder(
+                          itemCount: model.managerHomeLists.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return
+                            Padding(
+                              padding: EdgeInsets.all(10),
+                              child: customForButton(context, model, model.managerHomeLists[index],index));
+                            
+                          
+                          }),
+                  )),
+              backgroundColor: AppColor.appColorWhite,
+              body: SafeArea(
+                  top: const bool.fromEnvironment('name'),
+                  child: customShipmentsList(context, model)),
+            ));
   }
 }

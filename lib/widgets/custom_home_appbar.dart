@@ -96,3 +96,40 @@ AppBar customShipmentDatailsAppBar(BuildContext context, {parentPage}) {
         ),
       ]);
 }
+
+
+AppBar customShortAppBarForManager(BuildContext context, {parentPage, resources}) {
+  return AppBar(
+      bottom: parentPage == 'home_manager'
+          ? PreferredSize(
+              child:
+                  ColoredBox(color: AppColor.appColorWhite, child: resources),
+              preferredSize: Size(customWidth(context),
+                  customHeight(context, percentage: 0.11)))
+          : null,
+      toolbarHeight: customHeight(context, percentage: 0.08),
+      shape: RoundedRectangleBorder(),
+      backgroundColor: AppColor.appColorCornflowerBlue,
+      foregroundColor: AppColor.appColorWhite,
+      actions: [
+        SizedBox(
+          width: customWidth(context, percentage: 0.7),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset('assets/app_name.svg',
+                    height: customHeight(context, percentage: 0.04))
+              ],
+            ),
+          ),
+        ),
+        Align(
+            alignment: Alignment.centerRight,
+            child: IconButton(
+              icon: Icon(Icons.notifications),
+              color: AppColor.appColorWhite,
+              onPressed: () {},
+            )),
+      ]);
+}

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:for_you/services/api_service.dart';
 import 'package:for_you/services/locator_service.dart';
 import '../constants/constants_helper.dart';
@@ -14,7 +15,7 @@ class UserService {
   ApiService apiService = locator.get<ApiService>();
   final SharedPreferenceService _sharedPreferenceService =
       locator.get<SharedPreferenceService>();
-  Future<bool> loginUser(String username, String password) async {
+  Future<bool> loginUser(context, String username, String password) async {
     final String apiUrl = AppConfig.appBaseUrl + AppConfig.getUserData;
 
     try {
@@ -42,13 +43,20 @@ class UserService {
 
           return true; // Login successful
         } else {
+        
           throw Exception(
               responseData['error'] ?? 'Unknown error'); // Login failed
         }
       } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Please try again!'), backgroundColor: AppColor.appColorAccentRed,
+        ));
         throw Exception('Failed to login'); // HTTP request failed
       }
     } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Please try again!'), backgroundColor: AppColor.appColorAccentRed,
+      ));
       print('Error: $e'); // Handle error here
       return false;
     }

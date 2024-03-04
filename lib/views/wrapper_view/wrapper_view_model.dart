@@ -12,6 +12,8 @@ import '../../models/user.dart';
 import '../../services/locator_service.dart';
 import '../../services/shared_preferences_service.dart';
 import '../../view_models/base_model.dart';
+import '../home_employee/home_manager_page_view.dart';
+import '../home_manager/home_manager_page_view.dart';
 
 class WrapperViewModel extends BaseModel {
   late bool _loggedIn;
@@ -20,25 +22,39 @@ class WrapperViewModel extends BaseModel {
     _loggedIn = false;
   }
 
-    User? userData;
+  User? userData;
 
   final SharedPreferenceService _sharedPreferenceService =
       locator.get<SharedPreferenceService>();
 
   int selectedItem = 0;
-  Widget selectedPage = const HomePageView();
+  Widget? selectedPage;
 
   void initialize() async {
     setBusy(true);
 
     await login();
-    var tempUserData =
-        await _sharedPreferenceService.getStringData(AppString.userData);
-    Map<String, dynamic> userInfo = json.decode(tempUserData);
-    userData = User.fromJson(userInfo);
+    Map<String, dynamic> userInfo;
+    await _sharedPreferenceService
+        .getStringData(AppString.userData)
+        .then((value) => {
+              userInfo = json.decode(value),
+              userData = User.fromJson(userInfo),
+            });
+
+            if (userData?.role == 'User') {
+          selectedPage = const HomePageView();
+          notifyListeners();
+        } else if (userData?.role == 'Manager') {
+          selectedPage = const HomeManagerPageView();
+          notifyListeners();
+        } else {
+          selectedPage = const HomeEmployeePageView();
+          notifyListeners();
+        }
+    notifyListeners();
     print(userData!.userId);
     setBusy(false);
-    notifyListeners();
   }
 
   Future<void> changePage(BuildContext context) async {
@@ -54,7 +70,8 @@ class WrapperViewModel extends BaseModel {
       _loggedIn = value;
       if (_loggedIn) {
         print('object $_loggedIn');
-        selectedPage = const HomePageView();
+
+        
         notifyListeners();
       } else {
         selectedItem = 5;

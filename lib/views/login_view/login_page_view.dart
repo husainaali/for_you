@@ -172,7 +172,7 @@ class LoginPageView extends StatelessWidget {
                               model.textControllerUserPassword.text.length >
                                   3) {
                             model.userService
-                                .loginUser(model.userInformation.email!,
+                                .loginUser(context,model.userInformation.email!,
                                     model.userInformation.password!)
                                 .then((value) => {
                                       if (value) {context.go(WrapperRoute.path)}

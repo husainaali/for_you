@@ -31,3 +31,4 @@ part 'custom_title_lable.dart';
 part 'custom_time_item.dart';
 part 'custom_request_button.dart';
 part 'custom_dialog.dart';
+part 'custom_loading.dart';

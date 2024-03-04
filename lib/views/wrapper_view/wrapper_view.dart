@@ -17,6 +17,6 @@ class WrapperView extends StatelessWidget {
         onViewModelReady: (model) => model.initialize(),
         builder: (context, model, child) => Scaffold(
           bottomNavigationBar: model.selectedItem==5? null: bottomNavigationBar(context,model),
-          body: model.loggedIn ?  model.selectedPage:LoginPageView()));
+          body:model.busy? customLoading(): model.loggedIn ?  model.selectedPage:LoginPageView()));
   }
 }

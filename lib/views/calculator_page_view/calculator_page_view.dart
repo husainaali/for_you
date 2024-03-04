@@ -20,7 +20,7 @@ class CalculatorPageView extends StatelessWidget {
         viewModelBuilder: () => CalculatorPageViewModel(),
         onViewModelReady: (model) => model.initialize(context),
         builder: (context, model, child) => Scaffold(
-            appBar: customLongAppBar(context),
+            appBar: customShortAppBar(context),
             backgroundColor: AppColor.appColorWhite,
             body: SafeArea(
                 top: bool.fromEnvironment('name'),
