@@ -1,12 +1,13 @@
 part of 'registration_page_view.dart';
 
-customRegistrationTextFeild(context, label,controller,LoginPageViewModel model) {
+customRegistrationTextFeild(
+    context, label, controller, LoginPageViewModel model) {
   return TextField(
     controller: controller,
     keyboardType: TextInputType.name,
-onChanged: (value) {
-  model.fillRegistrationForm(value,label);
-},
+    onChanged: (value) {
+      model.fillRegistrationForm(value, label);
+    },
     // obscureText: true,
     decoration: InputDecoration(
       labelText: label,
@@ -23,29 +24,42 @@ onChanged: (value) {
   );
 }
 
-customUserForm(context,LoginPageViewModel model) {
+customUserForm(context, LoginPageViewModel model) {
   return Column(
     children: [
-      customRegistrationTextFeild(context, 'Full Name',model.textControllerUserFullName,model),
-      customRegistrationTextFeild(context, 'Personal ID',model.textControllerUserCPR,model),
-      customRegistrationTextFeild(context, 'Occupation',model.textControllerUserOccupation,model),
-      customRegistrationTextFeild(context, 'Date of Birth',model.textControllerUserDOB,model),
-      customRegistrationTextFeild(context, 'Address',model.textControllerUserAddress,model),
-      customRegistrationTextFeild(context, 'Contact No. 1',model.textControllerUserContactNo1,model),
-      customRegistrationTextFeild(context, 'Contact No. 2',model.textControllerUserContactNo2,model)
+      customRegistrationTextFeild(
+          context, 'Full Name', model.textControllerUserFullName, model),
+      customRegistrationTextFeild(
+          context, 'Personal ID', model.textControllerUserCPR, model),
+      customRegistrationTextFeild(
+          context, 'Occupation', model.textControllerUserOccupation, model),
+      customRegistrationTextFeild(
+          context, 'Date of Birth', model.textControllerUserDOB, model),
+      customRegistrationTextFeild(
+          context, 'Address', model.textControllerUserAddress, model),
+      customRegistrationTextFeild(
+          context, 'Contact No. 1', model.textControllerUserContactNo1, model),
+      customRegistrationTextFeild(
+          context, 'Contact No. 2', model.textControllerUserContactNo2, model)
     ],
   );
 }
 
-customManagerForm(context,LoginPageViewModel model) {
+customManagerForm(context, LoginPageViewModel model) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      customRegistrationTextFeild(context,'Commercial Name',model.textControllerManagerCommercialName,model),
-      customRegistrationTextFeild(context,'Commercial ID',model.textControllerManagerCommercialID,model),
-      customRegistrationTextFeild(context,'Business Type',model.textControllerManagerBusinessType,model),
-      Gap(customHeight(context,percentage: 0.01)),
-      Text('Size of company/employee ',style: TextStyle(color: AppColor.appColorGreyNormal),),
+      customRegistrationTextFeild(context, 'Commercial Name',
+          model.textControllerManagerCommercialName, model),
+      customRegistrationTextFeild(context, 'Commercial ID',
+          model.textControllerManagerCommercialID, model),
+      customRegistrationTextFeild(context, 'Business Type',
+          model.textControllerManagerBusinessType, model),
+      Gap(customHeight(context, percentage: 0.01)),
+      Text(
+        'Size of company/employee ',
+        style: TextStyle(color: AppColor.appColorGreyNormal),
+      ),
       Row(
         children: List.generate(
           3,
@@ -60,10 +74,14 @@ customManagerForm(context,LoginPageViewModel model) {
                   fillColor:
                       MaterialStateProperty.all(AppColor.appColorGreyNormal),
                   value: true,
-                  groupValue: null,
+                  groupValue: model.selectedCompanySize == index ? true : false,
                   onChanged: (value) {
-
-
+                    model.selectedCompanySize = index;
+                    print(index);
+                    print(model.selectedCompanySize );
+                    final size = index==0?"Small":index==1?"Medium":"Large";
+                    model.fillRegistrationForm(size, "Company Size");
+                    model.notifyListeners();
                   },
                 ),
                 AutoSizeText(
@@ -81,9 +99,12 @@ customManagerForm(context,LoginPageViewModel model) {
           ),
         ),
       ),
-      customRegistrationTextFeild(context,'Address'      ,model.textControllerManagerAddress,model),
-      customRegistrationTextFeild(context,'Contact No. 1',model.textControllerManagerContactNo1,model),
-      customRegistrationTextFeild(context,'Contact No. 2',model.textControllerManagerContactNo2,model)
+      customRegistrationTextFeild(
+          context, 'Address', model.textControllerManagerAddress, model),
+      customRegistrationTextFeild(context, 'Contact No. 1',
+          model.textControllerManagerContactNo1, model),
+      customRegistrationTextFeild(context, 'Contact No. 2',
+          model.textControllerManagerContactNo2, model)
     ],
   );
 }

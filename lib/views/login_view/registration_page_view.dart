@@ -14,7 +14,8 @@ import 'login_page_view_model.dart';
 part 'custom_registration_page_parts.dart';
 
 class RegistrationPageView extends StatelessWidget {
-  RegistrationPageView({Key? key,
+  RegistrationPageView({
+    Key? key,
     required this.userName,
     required this.password,
   }) : super(key: key);
@@ -36,7 +37,8 @@ class RegistrationPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginPageViewModel>.reactive(
         viewModelBuilder: () => LoginPageViewModel(),
-        onViewModelReady: (model) => model.registrationInitialize(userName,password),
+        onViewModelReady: (model) =>
+            model.registrationInitialize(userName, password),
         builder: (context, model, child) => Scaffold(
             backgroundColor: Colors.white,
             body: SafeArea(
@@ -67,6 +69,7 @@ class RegistrationPageView extends StatelessWidget {
                                 style: model.isUser ? null : buttonStyle,
                                 onPressed: () {
                                   model.isUser = true;
+                                  model.userInformation.role = 'User';
                                   model.notifyListeners();
                                 },
                                 child: Text(
@@ -89,6 +92,7 @@ class RegistrationPageView extends StatelessWidget {
                                 style: model.isUser ? buttonStyle : null,
                                 onPressed: () {
                                   model.isUser = false;
+                                  model.userInformation.role = 'Manager';
                                   model.notifyListeners();
                                 },
                                 child: Container(
@@ -106,16 +110,18 @@ class RegistrationPageView extends StatelessWidget {
                     ),
                   ),
                   model.isUser
-                      ? customUserForm(context,model)
-                      : customManagerForm(context,model),
+                      ? customUserForm(context, model)
+                      : customManagerForm(context, model),
                   Gap(customHeight(context, percentage: 0.02)),
                   customRequestButton(context, 'Register', () {
-                    model.userService.registerUser(model.userInformation).then((value) => {
-                      if(value){
-                        
-                        context.go(WrapperRoute.path),
-                      }
-                    });
+                    model.userService
+                        .registerUser(model.userInformation)
+                        .then((value) => {
+                              if (value)
+                                {
+                                  context.go(WrapperRoute.path),
+                                }
+                            });
                   }),
                   Gap(customHeight(context, percentage: 0.04)),
                 ]))));

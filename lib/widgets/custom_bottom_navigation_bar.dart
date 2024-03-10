@@ -9,16 +9,25 @@ Widget bottomNavigationBar(context, WrapperViewModel model) {
       onTap: (value) async {
         model.onNavigationBarTapped(value);
         if (value == 0) {
-          model.selectedPage = model.userData!.role=='User'? HomePageView():model.userData!.role=='Manager'?HomeManagerPageView():HomeEmployeePageView();
+          model.selectedPage = model.userData!.role == 'User'
+              ? HomePageView()
+              : model.userData!.role == 'Manager'
+                  ? HomeManagerPageView()
+                  : HomeEmployeePageView();
           model.selectedItem = 0;
           model.notifyListeners();
         } else if (value == 1) {
-
-          model.selectedPage = model.userData!.role=='User'? MapPageView():model.userData!.role=='Manager'?EmployeesPageView(): ManagerPageView();
+          model.selectedPage = model.userData!.role == 'User'
+              ? MapPageView()
+              : model.userData!.role == 'Manager'
+                  ? EmployeesPageView()
+                  : ManagerPageView();
           model.selectedItem = 1;
           model.notifyListeners();
         } else if (value == 2) {
-          model.selectedPage =  model.userData!.role=='User'?CalculatorPageView():MapPageView();
+          model.selectedPage = model.userData!.role == 'User'
+              ? CalculatorPageView()
+              : MapPageView();
           model.selectedItem = 2;
           model.notifyListeners();
         } else if (value == 3) {
@@ -38,27 +47,42 @@ Widget bottomNavigationBar(context, WrapperViewModel model) {
             backgroundColor: AppColor.appColorCornflowerBlue,
             label: ''),
         BottomNavigationBarItem(
-            icon: model.userData?.role=='User'?Icon(
-              Icons.pin_drop,
-              color: model.selectedItem == 1
-                  ? AppColor.appColorAccentRed
-                  : AppColor.appColorGreylight,
-            ):model.userData?.role=='Manager'?SvgPicture.asset('assets/employees_icon.svg',color: model.selectedItem == 1
-                  ? AppColor.appColorAccentRed
-                  : AppColor.appColorGreylight,):SvgPicture.asset('assets/manager_icon.svg',color: model.selectedItem == 1
-                  ? AppColor.appColorAccentRed
-                  : AppColor.appColorGreylight,),
+            icon: model.userData?.role == 'User'
+                ? Icon(
+                    Icons.pin_drop,
+                    color: model.selectedItem == 1
+                        ? AppColor.appColorAccentRed
+                        : AppColor.appColorGreylight,
+                  )
+                : model.userData?.role == 'Manager'
+                    ? SvgPicture.asset(
+                        'assets/employees_icon.svg',
+                        color: model.selectedItem == 1
+                            ? AppColor.appColorAccentRed
+                            : AppColor.appColorGreylight,
+                      )
+                    : SvgPicture.asset(
+                        'assets/manager_icon.svg',
+                        color: model.selectedItem == 1
+                            ? AppColor.appColorAccentRed
+                            : AppColor.appColorGreylight,
+                      ),
             backgroundColor: AppColor.appColorCornflowerBlue,
             label: ''),
         BottomNavigationBarItem(
-            icon: model.userData?.role=='User'? Icon(
-              Icons.calculate,
-              color: model.selectedItem == 2
-                  ? AppColor.appColorAccentRed
-                  : AppColor.appColorGreylight,
-            ):SvgPicture.asset('assets/map.svg',color: model.selectedItem == 2
-                  ? AppColor.appColorAccentRed
-                  : AppColor.appColorGreylight,),
+            icon: model.userData?.role == 'User'
+                ? Icon(
+                    Icons.calculate,
+                    color: model.selectedItem == 2
+                        ? AppColor.appColorAccentRed
+                        : AppColor.appColorGreylight,
+                  )
+                : SvgPicture.asset(
+                    'assets/map.svg',
+                    color: model.selectedItem == 2
+                        ? AppColor.appColorAccentRed
+                        : AppColor.appColorGreylight,
+                  ),
             backgroundColor: AppColor.appColorCornflowerBlue,
             label: ''),
         BottomNavigationBarItem(
@@ -71,48 +95,4 @@ Widget bottomNavigationBar(context, WrapperViewModel model) {
             backgroundColor: AppColor.appColorCornflowerBlue,
             label: ''),
       ]);
-
-//   Container(
-//     height: customHeight(context,percentage: 0.2),
-//     width: customWidth(context),
-//     child: Stack(children: [
-
-//       Align(
-//         alignment: Alignment.bottomCenter,
-//         child: Container(
-//           color: AppColor.appColorCornflowerBlue,
-//           height: customHeight(context,percentage: 0.12),
-//           width: customWidth(context),
-//           child: Row(children: [],)),
-//       ),
-
-// Align(
-//   alignment: Alignment.topCenter,
-//   child: SizedBox(
-//     height: customHeight(context,percentage: 0.15),
-//     width: customHeight(context,percentage: 0.15),
-//     child: SizedBox(
-//     height: customHeight(context,percentage: 0.10),
-//     width: customHeight(context,percentage: 0.10),
-//     child: Transform.rotate(
-//         angle: 40.08,
-//         child: Container(
-//           decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),color :AppColor.appColorGrey),
-//           child:Center(
-//             child: Transform.rotate(
-//               angle: -40.08,
-//               child: Diamond(onTap: () {
-//                 print('object');
-//               },),
-//             ),
-//           ),
-
-//         ),
-//       ),
-//           ),
-//   ),
-// ),
-
-//     ]),
-//   );
 }

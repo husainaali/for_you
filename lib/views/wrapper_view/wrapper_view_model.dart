@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:for_you/routes/routes.dart';
 import 'package:for_you/views/home_view/home_page_view.dart';
@@ -27,34 +26,45 @@ class WrapperViewModel extends BaseModel {
   final SharedPreferenceService _sharedPreferenceService =
       locator.get<SharedPreferenceService>();
 
-  int selectedItem = 0;
+  int selectedItem = 5;
   Widget? selectedPage;
 
-  void initialize() async {
+  void initialize(BuildContext context) async {
     setBusy(true);
-
-    await login();
     Map<String, dynamic> userInfo;
-    await _sharedPreferenceService
-        .getStringData(AppString.userData)
-        .then((value) => {
-              userInfo = json.decode(value),
-              userData = User.fromJson(userInfo),
-            });
 
-            if (userData?.role == 'User') {
+    await isLogin().whenComplete(() async {
+      await _sharedPreferenceService
+          .getStringData(AppString.userData)
+          .then((userDataValue) => {
+                if (userDataValue != "")
+                  {
+                    userInfo = json.decode(userDataValue),
+                    userData = User.fromJson(userInfo),
+                  }
+                else
+                  {
+                    context.go(LoginPageViewRoute.path),
+                  }
+              });
+
+      if (userData != null && userData != "") {
+        if (userData?.role == 'User') {
           selectedPage = const HomePageView();
-          notifyListeners();
+          selectedItem = 0;
         } else if (userData?.role == 'Manager') {
           selectedPage = const HomeManagerPageView();
-          notifyListeners();
+          selectedItem = 0;
         } else {
           selectedPage = const HomeEmployeePageView();
-          notifyListeners();
+          selectedItem = 0;
         }
-    notifyListeners();
-    print(userData!.userId);
-    setBusy(false);
+      } else {
+        _loggedIn = false;
+      }
+      setBusy(false);
+      notifyListeners();
+    });
   }
 
   Future<void> changePage(BuildContext context) async {
@@ -62,7 +72,7 @@ class WrapperViewModel extends BaseModel {
     notifyListeners();
   }
 
-  login() async {
+  Future<void> isLogin() async {
     await _sharedPreferenceService
         .getBoolData(AppString.isUserLogInKey)
         .then((value) async {
@@ -71,7 +81,6 @@ class WrapperViewModel extends BaseModel {
       if (_loggedIn) {
         print('object $_loggedIn');
 
-        
         notifyListeners();
       } else {
         selectedItem = 5;

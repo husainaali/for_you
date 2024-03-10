@@ -14,6 +14,7 @@ class AppConfig {
 
   static const getUserData = "userlogin.php";
   static const registerUserData = "user_register.php";
+  static const newRegister = "new_register.php";
   static const registerManagerData = "manager_register.php";
   
   static const getCountriesCitiesData = "get_countries_cities.php";

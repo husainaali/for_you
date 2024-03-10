@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../models/user.dart';
@@ -46,8 +45,12 @@ class LoginPageViewModel extends BaseModel {
   bool isPasswordConfirmed = false;
 
   bool isServiceProvider = false;
+
+  int selectedCompanySize =0;
+
   initialize() {}
   registrationInitialize(userName, password) {
+    userInformation.companySize ="Small";
     userInformation.email = userName;
     userInformation.password = password;
   }
@@ -80,7 +83,13 @@ class LoginPageViewModel extends BaseModel {
         return userInformation.contactNo1 = data;
       case 'Contact No. 2':
         return userInformation.contactNo2 = data;
+      case 'Commercial Name':
+        return userInformation.commercialName = data;
+      case 'Commercial ID':
+        return userInformation.commercialID = data;
+      case 'Company Size':
+    // print(json.encode(userInformation.toJson()).toString());
+        return userInformation.companySize = data;
     }
-    print(json.encode(userInformation.toJson()).toString());
   }
 }

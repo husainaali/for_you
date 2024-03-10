@@ -14,7 +14,7 @@ class WrapperView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<WrapperViewModel>.reactive(
         viewModelBuilder: () => WrapperViewModel(),
-        onViewModelReady: (model) => model.initialize(),
+        onViewModelReady: (model) => model.initialize(context),
         builder: (context, model, child) => Scaffold(
           bottomNavigationBar: model.selectedItem==5? null: bottomNavigationBar(context,model),
           body:model.busy? customLoading(): model.loggedIn ?  model.selectedPage:LoginPageView()));

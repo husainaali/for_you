@@ -20,6 +20,7 @@ class SettingPageViewModel extends BaseModel {
 
   logout(BuildContext context) {
     _sharedPreferenceService.removeData(AppString.isUserLogInKey);
+    _sharedPreferenceService.removeData(AppString.userData);
 
     wrapperViewModel.selectedItem = 5;
     notifyListeners();
