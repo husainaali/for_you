@@ -12,7 +12,7 @@ class AppConfig {
     return operationMode == OperationModes.production ? productionUrl : testUrl;
   }
 
-  static const getUserData = "userlogin.php";
+  static const getUserData = "user_login.php";
   static const registerUserData = "user_register.php";
   static const newRegister = "new_register.php";
   static const registerManagerData = "manager_register.php";
