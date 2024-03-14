@@ -65,11 +65,11 @@ class UserService {
 
   Future<bool> registerUser(User userData) async {
     final String apiUrl = AppConfig.appBaseUrl + AppConfig.newRegister;
+    if(userData.email!=null){
     int atIndex = userData.email!.indexOf('@');
     String username = userData.email!.substring(0, atIndex);
     userData.userName = username;
-
-    print(json.encode(userData.toJson()).toString());
+    }
 
     // Define additional variables based on the user's role
     String additionalData = '';

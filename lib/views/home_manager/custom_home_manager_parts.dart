@@ -248,3 +248,4 @@ customShipmentsList(context, model) {
         );
       });
 }
+

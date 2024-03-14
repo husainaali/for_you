@@ -14,7 +14,7 @@ import '../views/calculator_page_view/addresses_control_page.dart';
 import '../views/calculator_page_view/calculator_page_view.dart';
 import '../views/calculator_page_view/calculator_page_view_model.dart';
 import '../views/employees_view/employees_page_view.dart';
-import '../views/home_employee/home_manager_page_view.dart';
+import '../views/home_employee/home_employee_page_view.dart';
 import '../views/home_manager/home_manager_page_view.dart';
 import '../views/login_view/login_page_view.dart';
 import '../views/login_view/registration_page_view.dart';

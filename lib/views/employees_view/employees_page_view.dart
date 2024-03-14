@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:for_you/routes/routes.dart';
+import 'package:for_you/views/employees_view/employee_register_form.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stacked/stacked.dart';
 import '../../constants/constants_helper.dart';
 import '../../widgets/custom_widget_helper.dart';
@@ -153,7 +156,9 @@ class EmployeesPageView extends StatelessWidget {
                       elevation: 30,
                       backgroundColor: AppColor.appColorCornflowerBlue,
                       child: Icon(Icons.add, color: AppColor.appColorWhite),
-                      onPressed: () {},
+                      onPressed: () {
+                        context.push(EmployeeRegisterFormRoute.path);
+                      },
                     ),
             ));
   }

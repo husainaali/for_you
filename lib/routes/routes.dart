@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:for_you/views/employees_view/employee_register_form.dart';
 import 'package:go_router/go_router.dart';
 
 import '../views/calculator_page_view/addresses_control_page.dart';
 import '../views/calculator_page_view/calculator_page_view.dart';
 import '../views/calculator_page_view/send_shipment_page_view.dart';
 import '../views/employees_view/employees_page_view.dart';
-import '../views/home_employee/home_manager_page_view.dart';
+import '../views/home_employee/home_employee_page_view.dart';
 import '../views/home_manager/home_manager_page_view.dart';
 import '../views/home_view/home_page_view.dart';
 import '../views/login_view/login_page_view.dart';
@@ -241,5 +242,18 @@ class EmployeesPageViewRoute extends GoRouteData {
 
     return  EmployeesPageView(
     );
+  }
+}
+
+@TypedGoRoute<EmployeeRegisterFormRoute>(
+    path: EmployeeRegisterFormRoute.path)
+class EmployeeRegisterFormRoute extends GoRouteData {
+  const EmployeeRegisterFormRoute();
+
+  static const path = '/employee_register_form_path';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return  const EmployeeRegisterForm();
   }
 }

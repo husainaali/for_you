@@ -23,6 +23,7 @@ List<RouteBase> get $appRoutes => [
       $mapPageViewRoute,
       $managerPageViewRoute,
       $employeesPageViewRoute,
+      $employeeRegisterFormRoute,
     ];
 
 RouteBase get $wrapperRoute => GoRouteData.$route(
@@ -381,6 +382,29 @@ extension $EmployeesPageViewRouteExtension on EmployeesPageViewRoute {
 
   String get location => GoRouteData.$location(
         '/employees_page_view_path',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $employeeRegisterFormRoute => GoRouteData.$route(
+      path: '/employee_register_form_path',
+      factory: $EmployeeRegisterFormRouteExtension._fromState,
+    );
+
+extension $EmployeeRegisterFormRouteExtension on EmployeeRegisterFormRoute {
+  static EmployeeRegisterFormRoute _fromState(GoRouterState state) =>
+      const EmployeeRegisterFormRoute();
+
+  String get location => GoRouteData.$location(
+        '/employee_register_form_path',
       );
 
   void go(BuildContext context) => context.go(location);

@@ -11,7 +11,7 @@ import '../../models/user.dart';
 import '../../services/locator_service.dart';
 import '../../services/shared_preferences_service.dart';
 import '../../view_models/base_model.dart';
-import '../home_employee/home_manager_page_view.dart';
+import '../home_employee/home_employee_page_view.dart';
 import '../home_manager/home_manager_page_view.dart';
 
 class WrapperViewModel extends BaseModel {

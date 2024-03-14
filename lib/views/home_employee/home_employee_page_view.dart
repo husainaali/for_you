@@ -12,7 +12,7 @@ import 'package:go_router/go_router.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../widgets/custom_widget_helper.dart';
-import 'home_manager_page_view_model.dart';
+import 'home_employee_page_view_model.dart';
 
 // part 'custom_home_parts.dart';
 
