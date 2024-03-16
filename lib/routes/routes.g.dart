@@ -17,6 +17,7 @@ List<RouteBase> get $appRoutes => [
       $shpmentDetailsViewRoute,
       $calculatorPageViewRoute,
       $sendShipmentPageViewRoute,
+      $managerSendShipmentPageViewRoute,
       $settingPageViewRoute,
       $registrationPageViewRoute,
       $addressesControlPageViewRoute,
@@ -243,6 +244,30 @@ extension $SendShipmentPageViewRouteExtension on SendShipmentPageViewRoute {
 
   String get location => GoRouteData.$location(
         '/send_shipment_page_view_path',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $managerSendShipmentPageViewRoute => GoRouteData.$route(
+      path: '/manager_send_shipment_page_view_path',
+      factory: $ManagerSendShipmentPageViewRouteExtension._fromState,
+    );
+
+extension $ManagerSendShipmentPageViewRouteExtension
+    on ManagerSendShipmentPageViewRoute {
+  static ManagerSendShipmentPageViewRoute _fromState(GoRouterState state) =>
+      const ManagerSendShipmentPageViewRoute();
+
+  String get location => GoRouteData.$location(
+        '/manager_send_shipment_page_view_path',
       );
 
   void go(BuildContext context) => context.go(location);

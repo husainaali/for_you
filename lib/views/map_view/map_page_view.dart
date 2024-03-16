@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:for_you/constants/constants_helper.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +36,24 @@ class MapPageView extends StatelessWidget {
                       urlTemplate:
                           'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                       userAgentPackageName: 'com.foryou.app'),
+                  MarkerLayer(
+                      markers: List.generate(
+                    5,
+                    (index) => Marker(
+                        point: LatLng(
+                          26.0667 + index * 0.01,
+                          50.5577 + index * 0.01,
+                        ),
+                        width: 64,
+                        height: 64,
+                        alignment: Alignment.centerLeft,
+                        child: IconButton(
+                            onPressed: () {
+                              print('greate $index');
+                            },
+                            icon: SvgPicture.asset('assets/map_pin.svg',
+                              height: customHeight(context,percentage: 0.08),) )),
+                  ))
                 ],
               ),
             )));

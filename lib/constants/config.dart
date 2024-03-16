@@ -21,6 +21,7 @@ class AppConfig {
   static const getShipmentMethod = "get_shipment_method.php";
   static const getAddresses = "get_my_address.php";
   static const addUpdateAddress = "manage_address.php";
+  static const getEmployeesForManager = "get_employees_for_manager.php";
 
 
 }

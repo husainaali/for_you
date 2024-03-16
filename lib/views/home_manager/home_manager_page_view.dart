@@ -26,27 +26,32 @@ class HomeManagerPageView extends StatelessWidget {
         viewModelBuilder: () => HomeManagerPageViewModel(),
         onViewModelReady: (model) => model.initialize(),
         builder: (context, model, child) => Scaffold(
-              appBar: customShortAppBarForManager(context,
-                  parentPage: 'home_manager',
-                  resources: SizedBox(
-                    width: customWidth(context),
-                    height: customWidth(context, percentage: 0.23),
-                    child: ListView.builder(
-                          itemCount: model.managerHomeLists.length,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return
-                            Padding(
-                              padding: EdgeInsets.all(10),
-                              child: customForButton(context, model, model.managerHomeLists[index],index));
-                            
-                          
-                          }),
-                  )),
-              backgroundColor: AppColor.appColorWhite,
-              body: SafeArea(
-                  top: const bool.fromEnvironment('name'),
-                  child: customShipmentsList(context, model)),
-            ));
+            appBar: customShortAppBarForManager(context,
+                parentPage: 'home_manager',
+                resources: SizedBox(
+                  width: customWidth(context),
+                  height: customWidth(context, percentage: 0.23),
+                  child: ListView.builder(
+                      itemCount: model.managerHomeLists.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                            padding: EdgeInsets.all(10),
+                            child: customForButton(context, model,
+                                model.managerHomeLists[index], index));
+                      }),
+                )),
+            backgroundColor: AppColor.appColorWhite,
+            body: SafeArea(
+                top: const bool.fromEnvironment('name'),
+                child: customShipmentsList(context, model)),
+            floatingActionButton: FloatingActionButton(
+              elevation: 30,
+              backgroundColor: AppColor.appColorCornflowerBlue,
+              child: Icon(Icons.add, color: AppColor.appColorWhite),
+              onPressed: () {
+                context.push(ManagerSendShipmentPageViewRoute.path);
+              },
+            )));
   }
 }

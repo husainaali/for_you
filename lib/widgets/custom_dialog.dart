@@ -2,13 +2,14 @@ part of 'custom_widget_helper.dart';
 
 customAddressDialog({
   required context,
-  required CalculatorPageViewModel model,
+  required model,
   required requestName,
 }) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return AboutDialog(
+      return AlertDialog(
+        content: Column(
         children: [
           SizedBox(
             height: customHeight(context, percentage: 0.7),
@@ -85,7 +86,10 @@ customAddressDialog({
                 }),
           ),
         ],
-      );
+      ),
+      actions: [
+        TextButton(onPressed: () => context.pop(), child: Text("Close"))
+      ],);
     },
   );
 }

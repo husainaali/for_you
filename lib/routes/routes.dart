@@ -8,6 +8,7 @@ import '../views/calculator_page_view/send_shipment_page_view.dart';
 import '../views/employees_view/employees_page_view.dart';
 import '../views/home_employee/home_employee_page_view.dart';
 import '../views/home_manager/home_manager_page_view.dart';
+import '../views/home_manager/manager_send_shipment_page_view.dart';
 import '../views/home_view/home_page_view.dart';
 import '../views/login_view/login_page_view.dart';
 import '../views/login_view/registration_page_view.dart';
@@ -152,6 +153,18 @@ class SendShipmentPageViewRoute extends GoRouteData {
 
     return SendShipmentPageView(
       sendShipmentDetails: data['sendShipmentDetails'],
+    );
+  }
+}
+@TypedGoRoute<ManagerSendShipmentPageViewRoute>(path: ManagerSendShipmentPageViewRoute.path)
+class ManagerSendShipmentPageViewRoute extends GoRouteData {
+  const ManagerSendShipmentPageViewRoute();
+
+  static const path = '/manager_send_shipment_page_view_path';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return ManagerSendShipmentPageView(
     );
   }
 }

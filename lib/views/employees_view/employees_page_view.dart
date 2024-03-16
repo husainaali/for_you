@@ -20,7 +20,7 @@ class EmployeesPageView extends StatelessWidget {
               backgroundColor: Colors.white,
               body: SafeArea(
                 child: ListView.builder(
-                    itemCount: 10,
+                    itemCount: model.employee!=null?model.employee!.length:0,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.all(15.0),
@@ -59,7 +59,7 @@ class EmployeesPageView extends StatelessWidget {
                                           ),
                                         ),
                                         TextSpan(
-                                          text: 'Hazem Ahmed Nader\n',
+                                          text: '${model.employee![index].fullName}\n',
                                           style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                             fontSize: customHeight(context,
@@ -86,7 +86,7 @@ class EmployeesPageView extends StatelessWidget {
                                           ),
                                         ),
                                         TextSpan(
-                                          text: '+97334334444\n',
+                                          text: '${model.employee![index].contactNo1}\n',
                                           style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                             fontSize: customHeight(context,
@@ -104,7 +104,7 @@ class EmployeesPageView extends StatelessWidget {
                                           ),
                                         ),
                                         TextSpan(
-                                          text: 'Status: Active ',
+                                          text: 'Status: ${model.employee![index].isEmployeeActive}',
                                           style: TextStyle(
                                             fontWeight: FontWeight.w300,
                                             fontSize: customHeight(context,
@@ -150,8 +150,7 @@ class EmployeesPageView extends StatelessWidget {
                       );
                     }),
               ),
-              floatingActionButton: model.addEditEmployees
-                  ? null
+              floatingActionButton
                   : FloatingActionButton(
                       elevation: 30,
                       backgroundColor: AppColor.appColorCornflowerBlue,

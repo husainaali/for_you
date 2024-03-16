@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 
 import '../../constants/strings.dart';
+import '../../models/employee.dart';
 import '../../models/user.dart';
 import '../../services/locator_service.dart';
 import '../../services/shared_preferences_service.dart';
@@ -11,7 +13,6 @@ import '../../view_models/base_model.dart';
 import '../wrapper_view/wrapper_view_model.dart';
 
 class EmployeesPageViewModel extends BaseModel {
-  bool addEditEmployees = false;
   final WrapperViewModel wrapperViewModel = locator.get<WrapperViewModel>();
   final SharedPreferenceService _sharedPreferenceService =
       locator.get<SharedPreferenceService>();
@@ -19,7 +20,8 @@ class EmployeesPageViewModel extends BaseModel {
   bool isEmployeeActive = true;
   User userInformation = User();
   User? userData;
-
+  final ReactiveValue<List<Employee>> _employee = ReactiveValue([]);
+  List<Employee>? get employee => _employee.value;
   TextEditingController textControllerEmployeeFullName =
       TextEditingController();
   TextEditingController textControllerEmployeeUserName =
@@ -28,7 +30,18 @@ class EmployeesPageViewModel extends BaseModel {
       TextEditingController();
   TextEditingController textControllerUserPassword = TextEditingController();
 
-  initialize() {}
+  initialize() async {
+
+ var tempUserData =
+        await _sharedPreferenceService.getStringData(AppString.userData);
+    Map<String, dynamic> userInfo = json.decode(tempUserData);
+    userData = User.fromJson(userInfo);
+
+    await userService.getEmployees(userData!.userId).whenComplete(() {
+    _employee.value =userService.employee!.toList();
+    notifyListeners();
+    });
+  }
 
   empRegisterFormInit() async {
     var tempUserData =
