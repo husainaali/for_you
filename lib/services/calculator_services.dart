@@ -84,6 +84,7 @@ class CalculatorServices {
 
   Future<bool> addOrUpdateAddress({
     required String userID,
+    required String role,
     required String requestName,
     required String addressId,
     required String addressName,
@@ -91,15 +92,18 @@ class CalculatorServices {
     required String addressLine2,
     required String cityId,
     required String countryId,
+    required String lat,
+    required String lng,
   }) async {
     final String apiUrl = AppConfig.appBaseUrl +
-        AppConfig.addUpdateAddress; // Replace with your API URL
+        AppConfig.addUpdateAddress;
 
     try {
       final response = await http.post(
         Uri.parse(apiUrl),
         body: {
           'userId':userID,
+          'role':role,
           'addressId': requestName == 'newAddress' ? '-1' : addressId,
           'addressName': addressName,
           'addressLine1': addressLine1,

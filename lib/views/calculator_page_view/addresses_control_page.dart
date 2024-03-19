@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../constants/constants_helper.dart';
@@ -154,6 +156,49 @@ class AddressesControlPageView extends StatelessWidget {
                                 customDropDownMenuAddressesPage(context,
                                     model.fromCities, 'AddressCity', model),
                                 Gap(customWidth(context, percentage: 0.04)),
+                                Container(
+                                  height:
+                                      customHeight(context, percentage: 0.4),
+                                  width: customWidth(context, percentage: 0.8),
+                                  child: FlutterMap(
+                                    options: MapOptions(
+                                      center: LatLng(26.0667,
+                                          50.5577), // Initial center of the map
+                                      zoom: 12.0, // Initial zoom level
+                                      onTap: (tapPosition, point) {
+                                        model.handleTap(point, context);
+                                      },
+                                    ),
+                                    children: [
+                                      TileLayer(
+                                          urlTemplate:
+                                              'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                          userAgentPackageName:
+                                              'com.foryou.app'),
+                                      MarkerLayer(
+                                          markers: List.generate(
+                                        model.markers.length,
+                                        (index) => Marker(
+                                            point: LatLng(
+                                              model.markers.last.point.latitude,
+                                              model.markers.last.point.longitude,
+                                            ),
+                                            width: 64,
+                                            height: 64,
+                                            alignment: Alignment.centerLeft,
+                                            child: IconButton(
+                                                onPressed: () {
+                                                  print('greate $index');
+                                                },
+                                                icon: SvgPicture.asset(
+                                                  'assets/map_pin.svg',
+                                                  height: customHeight(context,
+                                                      percentage: 0.08),
+                                                ))),
+                                      ))
+                                    ],
+                                  ),
+                                ),
                                 FilledButton(
                                   onPressed: () {
                                     model.addressData['requestName'] =
@@ -168,6 +213,8 @@ class AddressesControlPageView extends StatelessWidget {
                                         model.textControllerAddressLine1.text;
                                     model.addressData['addressLine2'] =
                                         model.textControllerAddressLine1.text;
+                                    model.addressData['lat'] = '${model.markers.last.point.latitude}';
+                                    model.addressData['lng'] = '${model.markers.last.point.longitude}';
                                     model.saveAddress();
                                     model.changeToEditAddress();
                                   },
@@ -265,7 +312,8 @@ class AddressesControlPageView extends StatelessWidget {
                                           maxWidth: customWidth(context,
                                               percentage: 0.3),
                                           child: AutoSizeText(
-                                            model.addressLableText(model.addresses[index]),
+                                            model.addressLableText(
+                                                model.addresses[index]),
                                             maxFontSize: 18,
                                             // 'Ahmed - salmabad building 1234 road 321 block 12',
                                             style: TextStyle(

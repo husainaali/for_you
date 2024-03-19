@@ -2,11 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:for_you/models/addresses.dart';
 import 'package:for_you/models/send_shipment_details.dart';
 import 'package:for_you/models/shipment_methods.dart';
 import 'package:for_you/routes/routes.dart';
 import 'package:go_router/go_router.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../constants/strings.dart';
@@ -39,6 +41,7 @@ class CalculatorPageViewModel extends BaseModel {
   bool weightRadioButton = true;
   bool addEditNewAddress = false;
   bool showShippingMethods = false;
+  List<Marker> markers = [];
 
   double? packageWeight = 0.0;
 
@@ -64,6 +67,8 @@ class CalculatorPageViewModel extends BaseModel {
   TextEditingController textControllerAddressName = TextEditingController();
   TextEditingController textControllerAddressLine1 = TextEditingController();
   TextEditingController textControllerAddressLine2 = TextEditingController();
+  String lat='';
+  String lng='';
   late BuildContext context;
 
   Map<String, String> addressData = {
@@ -297,6 +302,7 @@ class CalculatorPageViewModel extends BaseModel {
     Map<String, dynamic> userInfo = json.decode(tempUserData);
     userData = User.fromJson(userInfo);
     addressData['userID'] = '${userData!.userId}';
+    addressData['role'] = '${userData!.role}';
     print(userData!.userId);
     getAddresses(userData!.userId);
     await getCountries();
@@ -306,6 +312,7 @@ class CalculatorPageViewModel extends BaseModel {
     await _calculatorServices
         .addOrUpdateAddress(
           userID: addressData['userID'] ?? '',
+          role:addressData['role']??'',
           requestName: addressData['requestName'] ?? '',
           addressId: addressData['addressId'] ?? '',
           addressName: addressData['addressName'] ?? '',
@@ -313,6 +320,8 @@ class CalculatorPageViewModel extends BaseModel {
           addressLine2: addressData['addressLine2'] ?? '',
           cityId: addressData['cityId'] ?? '',
           countryId: addressData['countryId'] ?? '',
+          lat: addressData['lat'] ?? '',
+          lng: addressData['lng'] ?? '',
         )
         .then((value) => {});
   }
@@ -335,5 +344,52 @@ class CalculatorPageViewModel extends BaseModel {
         '${address.addressName} - ${address.cityName}(${address.countryName})-${address.addressLine1}- ${address.addressLine2}';
 
     return addressText;
+  }
+
+
+  Future<void> handleTap(LatLng latLng,context) async {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Add Data'),
+          content: Text('Do you want to add data at this location?'),
+          actions: <Widget>[
+            FilledButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FilledButton(
+              child: Text('Add'),
+              onPressed: () {
+                addMarker(latLng);
+                Navigator.of(context).pop();
+                notifyListeners();
+                // Here you can handle data recording or any other action you want to take
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+    void addMarker(LatLng latLng) {
+  lat = '${latLng.latitude}';
+  lng = '${latLng.longitude}';
+      markers.add(
+        Marker(
+          width: 80.0,
+          height: 80.0,
+          point: latLng,
+          child:Icon(
+            Icons.pin_drop,
+            color: Colors.red,
+          ), 
+        ),
+      );
+    
   }
 }
