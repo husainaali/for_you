@@ -46,7 +46,7 @@ class AddressesControlPageView extends StatelessWidget {
                                     maxFontSize: 24,
                                     minFontSize: 18,
                                     style: TextStyle(
-                                        color: AppColor.appColorCornflowerBlue),
+                                        color: AppColor.appColorMainRed),
                                   ),
                                 ),
                                 Gap(customWidth(context, percentage: 0.04)),
@@ -63,7 +63,7 @@ class AddressesControlPageView extends StatelessWidget {
                                       borderSide: BorderSide(
                                         width: customHeight(context,
                                             percentage: 0.003),
-                                        color: AppColor.appColorCornflowerBlue,
+                                        color: AppColor.appColorMainRed,
                                       ),
                                     ),
                                     hintText: 'Address name',
@@ -93,7 +93,7 @@ class AddressesControlPageView extends StatelessWidget {
                                       borderSide: BorderSide(
                                         width: customHeight(context,
                                             percentage: 0.003),
-                                        color: AppColor.appColorCornflowerBlue,
+                                        color: AppColor.appColorMainRed,
                                       ),
                                     ),
                                     hintText: 'Address line 1',
@@ -123,7 +123,7 @@ class AddressesControlPageView extends StatelessWidget {
                                       borderSide: BorderSide(
                                         width: customHeight(context,
                                             percentage: 0.003),
-                                        color: AppColor.appColorCornflowerBlue,
+                                        color: AppColor.appColorMainRed,
                                       ),
                                     ),
                                     hintText: 'Address line 2',
@@ -147,7 +147,7 @@ class AddressesControlPageView extends StatelessWidget {
                                     maxFontSize: 24,
                                     minFontSize: 18,
                                     style: TextStyle(
-                                        color: AppColor.appColorCornflowerBlue),
+                                        color: AppColor.appColorMainRed),
                                   ),
                                 ),
                                 customDropDownMenuAddressesPage(context,
@@ -155,50 +155,84 @@ class AddressesControlPageView extends StatelessWidget {
                                 Gap(customWidth(context, percentage: 0.04)),
                                 customDropDownMenuAddressesPage(context,
                                     model.fromCities, 'AddressCity', model),
-                                Gap(customWidth(context, percentage: 0.04)),
+                                Gap(customWidth(context, percentage: 0.1)),
+                                const Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: AutoSizeText(
+                                    'Select you address from the map',
+                                    maxFontSize: 24,
+                                    minFontSize: 18,
+                                    style: TextStyle(
+                                        color: AppColor.appColorMainRed),
+                                  ),
+                                ),
+                                Gap(customWidth(context, percentage: 0.1)),
                                 Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                        20), // Adjust the value to change corner roundness
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurStyle: BlurStyle.inner,
+                                        color: Colors.grey
+                                            .withOpacity(0.2), // Shadow color
+                                        spreadRadius: 4, // Spread radius
+                                        blurRadius: 10, // Blur radius
+                                        offset: Offset(0, 1), // Offset
+                                      ),
+                                    ],
+                                  ),
                                   height:
                                       customHeight(context, percentage: 0.4),
                                   width: customWidth(context, percentage: 0.8),
-                                  child: FlutterMap(
-                                    options: MapOptions(
-                                      center: LatLng(26.0667,
-                                          50.5577), // Initial center of the map
-                                      zoom: 12.0, // Initial zoom level
-                                      onTap: (tapPosition, point) {
-                                        model.handleTap(point, context);
-                                      },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(
+                                        15), // Adjust the value to change corner roundness
+
+                                    child: FlutterMap(
+                                      options: MapOptions(
+                                        center: LatLng(26.0667,
+                                            50.5577), // Initial center of the map
+                                        zoom: 12.0, // Initial zoom level
+                                        onTap: (tapPosition, point) {
+                                          model.handleTap(point, context);
+                                        },
+                                      ),
+                                      children: [
+                                        TileLayer(
+                                            urlTemplate:
+                                                'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                            userAgentPackageName:
+                                                'com.foryou.app'),
+                                        MarkerLayer(
+                                            markers: List.generate(
+                                          model.markers.length,
+                                          (index) => Marker(
+                                              point: LatLng(
+                                                model.markers.last.point
+                                                    .latitude,
+                                                model.markers.last.point
+                                                    .longitude,
+                                              ),
+                                              width: 64,
+                                              height: 64,
+                                              alignment: Alignment.centerLeft,
+                                              child: IconButton(
+                                                  onPressed: () {
+                                                    print('greate $index');
+                                                  },
+                                                  icon: SvgPicture.asset(
+                                                    'assets/map_pin.svg',
+                                                    height: customHeight(
+                                                        context,
+                                                        percentage: 0.08),
+                                                  ))),
+                                        ))
+                                      ],
                                     ),
-                                    children: [
-                                      TileLayer(
-                                          urlTemplate:
-                                              'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                                          userAgentPackageName:
-                                              'com.foryou.app'),
-                                      MarkerLayer(
-                                          markers: List.generate(
-                                        model.markers.length,
-                                        (index) => Marker(
-                                            point: LatLng(
-                                              model.markers.last.point.latitude,
-                                              model.markers.last.point.longitude,
-                                            ),
-                                            width: 64,
-                                            height: 64,
-                                            alignment: Alignment.centerLeft,
-                                            child: IconButton(
-                                                onPressed: () {
-                                                  print('greate $index');
-                                                },
-                                                icon: SvgPicture.asset(
-                                                  'assets/map_pin.svg',
-                                                  height: customHeight(context,
-                                                      percentage: 0.08),
-                                                ))),
-                                      ))
-                                    ],
                                   ),
                                 ),
+                                Gap(customWidth(context, percentage: 0.1)),
                                 FilledButton(
                                   onPressed: () {
                                     model.addressData['requestName'] =
@@ -213,15 +247,17 @@ class AddressesControlPageView extends StatelessWidget {
                                         model.textControllerAddressLine1.text;
                                     model.addressData['addressLine2'] =
                                         model.textControllerAddressLine1.text;
-                                    model.addressData['lat'] = '${model.markers.last.point.latitude}';
-                                    model.addressData['lng'] = '${model.markers.last.point.longitude}';
+                                    model.addressData['lat'] =
+                                        '${model.markers.last.point.latitude}';
+                                    model.addressData['lng'] =
+                                        '${model.markers.last.point.longitude}';
                                     model.saveAddress();
                                     model.changeToEditAddress();
                                   },
                                   child: Text('Save'),
                                   style: ButtonStyle(
                                       backgroundColor: MaterialStatePropertyAll(
-                                          AppColor.appColorCornflowerBlue)),
+                                          AppColor.appColorMainRed)),
                                 ),
                                 IconButton(
                                     onPressed: () {
@@ -248,7 +284,7 @@ class AddressesControlPageView extends StatelessWidget {
                                   minFontSize: 18,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: AppColor.appColorCornflowerBlue,
+                                    color: AppColor.appColorMainRed,
                                   ),
                                 ),
                               ),
@@ -285,7 +321,7 @@ class AddressesControlPageView extends StatelessWidget {
                                                   model.selectedPickUpAdressIndex ==
                                                           index
                                                       ? AppColor
-                                                          .appColorAccentRed
+                                                          .appColorMainBlack
                                                       : AppColor
                                                           .appColorGreyNormal)),
                                       backgroundColor: MaterialStateProperty.all(
@@ -304,7 +340,7 @@ class AddressesControlPageView extends StatelessWidget {
                                         Icon(
                                           Icons.home,
                                           color:
-                                              AppColor.appColorCornflowerBlue,
+                                              AppColor.appColorMainRed,
                                         ),
                                         Gap(customWidth(context,
                                             percentage: 0.04)),
@@ -321,7 +357,7 @@ class AddressesControlPageView extends StatelessWidget {
                                                 color: model.selectedPickUpAdressIndex ==
                                                         index
                                                     ? AppColor
-                                                        .appColorCornflowerBlue
+                                                        .appColorMainRed
                                                     : AppColor
                                                         .appColorGreyNormal),
                                             maxLines: 4,
@@ -346,7 +382,7 @@ class AddressesControlPageView extends StatelessWidget {
                   ? null
                   : FloatingActionButton(
                       elevation: 30,
-                      backgroundColor: AppColor.appColorCornflowerBlue,
+                      backgroundColor: AppColor.appColorMainRed,
                       child: Icon(Icons.add, color: AppColor.appColorWhite),
                       onPressed: () {
                         model.changeToEditAddress();

@@ -104,7 +104,7 @@ class CalculatorPageViewModel extends BaseModel {
     userData = User.fromJson(userInfo);
     addressData['userID'] = '${userData!.userId}';
     print(userData!.userId);
-    getAddresses(userData!.userId);
+    getAddresses(userData!.userId,userData!.role);
   }
 
   Future getCountries() async {
@@ -304,7 +304,7 @@ class CalculatorPageViewModel extends BaseModel {
     addressData['userID'] = '${userData!.userId}';
     addressData['role'] = '${userData!.role}';
     print(userData!.userId);
-    getAddresses(userData!.userId);
+    await getAddresses(userData!.userId,userData!.role);
     await getCountries();
   }
 
@@ -326,9 +326,9 @@ class CalculatorPageViewModel extends BaseModel {
         .then((value) => {});
   }
 
-  Future<void> getAddresses(userId) async {
+  Future<void> getAddresses(userId,role) async {
     _addresses.value.clear();
-    await _calculatorServices.getAddresses(userId).then((value) => {
+    await _calculatorServices.getAddresses(userId,role).then((value) => {
           if (value)
             {
               _addresses.value = _calculatorServices.addresses!,
@@ -352,8 +352,9 @@ class CalculatorPageViewModel extends BaseModel {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Add Data'),
-          content: Text('Do you want to add data at this location?'),
+          title: Text('Add point'),
+          
+          content: Text('Is this your address (${textControllerAddressName.text}) this location?'),
           actions: <Widget>[
             FilledButton(
               child: Text('Cancel'),

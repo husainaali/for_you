@@ -16,7 +16,7 @@ customForButton(context,HomeManagerPageViewModel model, title,index) {
           ),
         ),
         backgroundColor: MaterialStateProperty.all(model.isForYouBtnSelected==index
-            ? AppColor.appColorCornflowerBlue
+            ? AppColor.appColorMainRed
             : AppColor.appColorGreylight),
       ),
       onPressed: () {
@@ -53,7 +53,7 @@ customFromButton(context, model, title) {
           ),
         ),
         backgroundColor: MaterialStateProperty.all(!model.isForYouBtnSelected
-            ? AppColor.appColorCornflowerBlue
+            ? AppColor.appColorMainRed
             : AppColor.appColorGreylight),
       ),
       onPressed: () {
@@ -108,7 +108,7 @@ customShipmentsList(context, model) {
                                 width: customHeight(context, percentage: 0.0016),
                                 color: 
                                  
-                                     AppColor.appColorCornflowerBlue)),
+                                     AppColor.appColorMainRed)),
                         child: SizedBox(
                           height: customHeight(context, percentage: 0.02),
                           width: customWidth(context, percentage: 0.4),
@@ -205,14 +205,14 @@ customShipmentsList(context, model) {
                             border: Border.all(
                                 width: customHeight(context, percentage: 0.0016),
                                 color: 
-                                     AppColor.appColorAccentRed)),
+                                     AppColor.appColorMainBlack)),
                         child: Row(
                           children: [
                             Padding(
                               padding: EdgeInsets.only(
                                   left: customHeight(context, percentage: 0.014),
                                   right: customHeight(context, percentage: 0.014)),
-                              child: SvgPicture.asset('assets/package_icon.svg'),
+                              child: SvgPicture.asset('assets/package_icon.svg',color: AppColor.appColorMainRed,),
                             ),
                             AutoSizeText(
                               'TR123456789CK',
@@ -220,7 +220,7 @@ customShipmentsList(context, model) {
                                   fontSize:
                                       customHeight(context, percentage: 0.027),
                                   fontWeight: FontWeight.w300,
-                                  color: AppColor.appColorCornflowerBlue),
+                                  color: AppColor.appColorMainRed),
                               maxLines: 1,
                             ),
                             const Spacer(),
@@ -232,7 +232,7 @@ customShipmentsList(context, model) {
                                     fontSize:
                                         customHeight(context, percentage: 0.027),
                                     fontWeight: FontWeight.w300,
-                                    color: AppColor.appColorCornflowerBlue),
+                                    color: AppColor.appColorMainRed),
                                 maxLines: 2,
                               ),
                             ),

@@ -12,7 +12,7 @@ class SendShipmentPageView extends StatelessWidget {
   SendShipmentPageView({super.key, required this.sendShipmentDetails});
   final SendShipmentDetails sendShipmentDetails;
   final Icon leadingIcon =
-      const Icon(Icons.home, color: AppColor.appColorCornflowerBlue);
+      const Icon(Icons.home, color: AppColor.appColorMainRed);
   final IconButton actionIcon = IconButton(
       onPressed: () {}, icon: SvgPicture.asset('assets/edit_icon.svg'));
   @override
@@ -39,7 +39,7 @@ class SendShipmentPageView extends StatelessWidget {
                           minFontSize: 40,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: AppColor.appColorCornflowerBlue),
+                              color: AppColor.appColorMainRed),
                         ),
                       ),
                       Gap(customHeight(context, percentage: 0.02)),
@@ -70,7 +70,7 @@ class SendShipmentPageView extends StatelessWidget {
                         0.07,
                         1,
                         const Icon(Icons.calendar_month_outlined,
-                            color: AppColor.appColorCornflowerBlue),
+                            color: AppColor.appColorMainRed),
                         model,
                         'pickupDateTime',
                         actionButton: IconButton(
@@ -116,7 +116,7 @@ class SendShipmentPageView extends StatelessWidget {
                                   child: customHorizontalListItem(
                                       context,
                                       index == 1
-                                          ? AppColor.appColorCornflowerBlue
+                                          ? AppColor.appColorMainRed
                                           : AppColor.appColorGreyNormal,
                                       '08:30 am 03 Feb 2024',
                                       index,

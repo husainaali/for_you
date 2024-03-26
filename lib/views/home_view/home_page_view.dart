@@ -5,6 +5,8 @@ import 'package:for_you/constants/constants_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:for_you/routes/routes.dart';
 import 'package:for_you/views/shipments_view/shipments_page_view.dart';
+import 'package:rive/rive.dart';
+
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 // import 'package:rive/rive.dart';
@@ -32,7 +34,7 @@ class HomePageView extends StatelessWidget {
                   children: [
                     customTextFieldTracking(context),
                     customHomeButton(context),
-                    customAdsBanner(context),
+                    customAdsBanner(context,model),
                   ],
                 ))));
   }

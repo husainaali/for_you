@@ -34,7 +34,7 @@ class EmployeesPageView extends StatelessWidget {
                               border: Border.all(
                                   width: customHeight(context, percentage: 0.0016),
                                   color:
-                                       AppColor.appColorCornflowerBlue)),
+                                       AppColor.appColorMainRed)),
                           child: SizedBox(
                             height: customHeight(context, percentage: 0.02),
                             width: customWidth(context, percentage: 0.4),
@@ -153,7 +153,7 @@ class EmployeesPageView extends StatelessWidget {
               floatingActionButton
                   : FloatingActionButton(
                       elevation: 30,
-                      backgroundColor: AppColor.appColorCornflowerBlue,
+                      backgroundColor: AppColor.appColorMainRed,
                       child: Icon(Icons.add, color: AppColor.appColorWhite),
                       onPressed: () {
                         context.push(EmployeeRegisterFormRoute.path);

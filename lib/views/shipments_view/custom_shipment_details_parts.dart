@@ -8,7 +8,7 @@ customShipmentDetailsContainer(context) {
         height: customHeight(context, percentage: 0.3),
         decoration: BoxDecoration(
             color: AppColor.appColorGreylight.withOpacity(0.5),
-            border: Border.all(color: AppColor.appColorAccentRed)),
+            border: Border.all(color: AppColor.appColorMainBlack)),
         child: Column(
           children: [
             Padding(
@@ -16,7 +16,7 @@ customShipmentDetailsContainer(context) {
                   EdgeInsets.all(customHeight(context, percentage: 0.0162)),
               child: LinearProgressIndicator(
                 borderRadius: BorderRadius.circular(10),
-                color: AppColor.appColorCornflowerBlue,
+                color: AppColor.appColorMainRed,
                 backgroundColor: AppColor.appColorGreylight,
                 value: 0.7,
                 semanticsLabel: 'aa',
@@ -217,7 +217,7 @@ customShipmentDetailsContainer(context) {
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.edit_location_alt_outlined),
-                  color: AppColor.appColorCornflowerBlue,
+                  color: AppColor.appColorMainRed,
                 )
               ],
             )

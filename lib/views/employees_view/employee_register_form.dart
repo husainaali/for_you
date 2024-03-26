@@ -32,7 +32,7 @@ class EmployeeRegisterForm extends StatelessWidget {
                       Text(
                         'Register new employee!',
                         style: TextStyle(
-                            color: AppColor.appColorAccentRed,
+                            color: AppColor.appColorMainBlack,
                             fontSize: customWidth(context, percentage: 0.05)),
                       ),
                       Gap(customHeight(context, percentage: 0.03)),
@@ -47,7 +47,7 @@ class EmployeeRegisterForm extends StatelessWidget {
                           Checkbox(
                               fillColor: MaterialStateProperty.all(
                                   model.isEmployeeActive
-                                      ? AppColor.appColorCornflowerBlue
+                                      ? AppColor.appColorMainRed
                                       : null),
                               value: model.isEmployeeActive,
                               onChanged: (value) => {
@@ -60,7 +60,7 @@ class EmployeeRegisterForm extends StatelessWidget {
                           const Text(
                             'Is the employee active?',
                             style: TextStyle(
-                                color: AppColor.appColorCornflowerBlue),
+                                color: AppColor.appColorMainRed),
                           ),
                         ],
                       ),
@@ -74,7 +74,7 @@ class EmployeeRegisterForm extends StatelessWidget {
                         decoration: const InputDecoration(
                           labelText: 'Password',
                           labelStyle:
-                              TextStyle(color: AppColor.appColorCornflowerBlue),
+                              TextStyle(color: AppColor.appColorMainRed),
                           hintText: 'Enter your password',
                           hintStyle:
                               TextStyle(color: AppColor.appColorGreyNormal),
@@ -84,7 +84,7 @@ class EmployeeRegisterForm extends StatelessWidget {
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                                color: AppColor.appColorCornflowerBlue),
+                                color: AppColor.appColorMainRed),
                           ),
                         ),
                       ),
@@ -128,17 +128,16 @@ customRegistrationTextFeild(
     onChanged: (value) {
       model.fillRegistrationForm(value, label);
     },
-    // obscureText: true,
     decoration: InputDecoration(
       labelText: label,
-      labelStyle: const TextStyle(color: AppColor.appColorCornflowerBlue),
+      labelStyle: const TextStyle(color: AppColor.appColorMainRed),
       hintText: 'Enter your $label',
       hintStyle: const TextStyle(color: AppColor.appColorGreyNormal),
       enabledBorder: const UnderlineInputBorder(
         borderSide: BorderSide(color: AppColor.appColorGreyNormal),
       ),
       focusedBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(color: AppColor.appColorCornflowerBlue),
+        borderSide: BorderSide(color: AppColor.appColorMainRed),
       ),
     ),
   );

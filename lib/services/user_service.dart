@@ -53,14 +53,14 @@ class UserService {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('Please try again!'),
-          backgroundColor: AppColor.appColorAccentRed,
+          backgroundColor: AppColor.appColorMainBlack,
         ));
         throw Exception('Failed to login'); // HTTP request failed
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Please try again!'),
-        backgroundColor: AppColor.appColorAccentRed,
+        backgroundColor: AppColor.appColorMainBlack,
       ));
       print('Error: $e'); // Handle error here
       return false;

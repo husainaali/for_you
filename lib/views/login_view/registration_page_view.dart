@@ -76,7 +76,7 @@ class RegistrationPageView extends StatelessWidget {
                                   'User',
                                   style: TextStyle(
                                       color: model.isUser
-                                          ? AppColor.appColorCornflowerBlue
+                                          ? AppColor.appColorMainRed
                                           : AppColor.appColorGreyNormal),
                                 )),
                           ),
@@ -101,7 +101,7 @@ class RegistrationPageView extends StatelessWidget {
                                     style: TextStyle(
                                         color: model.isUser
                                             ? AppColor.appColorGreyNormal
-                                            : AppColor.appColorCornflowerBlue),
+                                            : AppColor.appColorMainRed),
                                   ),
                                 )),
                           ),

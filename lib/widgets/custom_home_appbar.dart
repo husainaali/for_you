@@ -1,10 +1,13 @@
 part of 'custom_widget_helper.dart';
 
 AppBar customLongAppBar(context) {
-  return AppBar(
+  return 
+  
+  
+  AppBar(
       toolbarHeight: customHeight(context, percentage: 0.23),
       shape: RoundedRectangleBorder(),
-      backgroundColor: AppColor.appColorCornflowerBlue,
+      backgroundColor: AppColor.appColorMainRed,
       actions: [
         SizedBox(
           width: customWidth(context, percentage: 0.7),
@@ -12,11 +15,18 @@ AppBar customLongAppBar(context) {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset('assets/logo.svg',
-                    height: customHeight(context, percentage: 0.09)),
+                SizedBox(
+                  height: customHeight(context,percentage: 0.14),
+                  child: const RiveAnimation.asset(
+                    animations: ['foryou'],
+                    'assets/foryou.riv',
+                    fit: BoxFit.fitHeight,
+                    alignment: Alignment.bottomCenter,
+                  ),
+                ),
                 SizedBox(height: 20),
-                SvgPicture.asset('assets/app_name.svg',
-                    height: customHeight(context, percentage: 0.04))
+                SvgPicture.asset('assets/foryousmallwhite.svg',
+                    height: customHeight(context, percentage: 0.06))
               ],
             ),
           ),
@@ -42,7 +52,7 @@ AppBar customShortAppBar(BuildContext context, {parentPage, resources}) {
           : null,
       toolbarHeight: customHeight(context, percentage: 0.08),
       shape: RoundedRectangleBorder(),
-      backgroundColor: AppColor.appColorCornflowerBlue,
+      backgroundColor: AppColor.appColorMainRed,
       foregroundColor: AppColor.appColorWhite,
       actions: [
         SizedBox(
@@ -51,7 +61,7 @@ AppBar customShortAppBar(BuildContext context, {parentPage, resources}) {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset('assets/app_name.svg',
+                SvgPicture.asset('assets/foryousmallwhite.svg',
                     height: customHeight(context, percentage: 0.04))
               ],
             ),
@@ -72,7 +82,7 @@ AppBar customShipmentDatailsAppBar(BuildContext context, {parentPage}) {
       toolbarHeight: customHeight(context, percentage: 0.18),
       shape: RoundedRectangleBorder(),
       backgroundColor: AppColor.appColorCornflowerBlueLight,
-      foregroundColor: AppColor.appColorCornflowerBlue,
+      foregroundColor: AppColor.appColorMainRed,
       actions: [
         SizedBox(
           height: customHeight(context, percentage: 0.15),
@@ -81,14 +91,14 @@ AppBar customShipmentDatailsAppBar(BuildContext context, {parentPage}) {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset('assets/package_icon.svg',
+              SvgPicture.asset('assets/package_icon.svg',color: AppColor.appColorMainRed,
                   height: customHeight(context, percentage: 0.06)),
               AutoSizeText(
                 'TR123456789CK',
                 style: TextStyle(
                     fontSize: customHeight(context, percentage: 0.027),
                     fontWeight: FontWeight.w300,
-                    color: AppColor.appColorCornflowerBlue),
+                    color: AppColor.appColorMainRed),
                 maxLines: 1,
               ),
             ],
@@ -97,8 +107,8 @@ AppBar customShipmentDatailsAppBar(BuildContext context, {parentPage}) {
       ]);
 }
 
-
-AppBar customShortAppBarForManager(BuildContext context, {parentPage, resources}) {
+AppBar customShortAppBarForManager(BuildContext context,
+    {parentPage, resources}) {
   return AppBar(
       bottom: parentPage == 'home_manager'
           ? PreferredSize(
@@ -109,7 +119,7 @@ AppBar customShortAppBarForManager(BuildContext context, {parentPage, resources}
           : null,
       toolbarHeight: customHeight(context, percentage: 0.08),
       shape: RoundedRectangleBorder(),
-      backgroundColor: AppColor.appColorCornflowerBlue,
+      backgroundColor: AppColor.appColorMainRed,
       foregroundColor: AppColor.appColorWhite,
       actions: [
         SizedBox(
@@ -118,7 +128,7 @@ AppBar customShortAppBarForManager(BuildContext context, {parentPage, resources}
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset('assets/app_name.svg',
+                SvgPicture.asset('assets/foryousmallwhite.svg',
                     height: customHeight(context, percentage: 0.04))
               ],
             ),

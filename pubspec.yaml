@@ -53,6 +53,9 @@ dependencies:
   json_annotation: ^4.8.1
   flutter_map: ^6.1.0
   latlong2: ^0.9.0
+  geocoding: ^3.0.0
+  image_picker: ^1.0.7
+  rive: ^0.13.1
 
 dev_dependencies:
   flutter_test:

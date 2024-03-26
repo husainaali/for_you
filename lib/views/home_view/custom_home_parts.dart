@@ -1,24 +1,26 @@
 part of 'home_page_view.dart';
 
 customHomeButton(BuildContext context) {
-  return SizedBox(
+  return 
+  
+  SizedBox(
     height: customHeight(context, percentage: 0.2),
     child: Container(
       decoration: ShapeDecoration(
         shape: CircleBorder(),
-        color: AppColor.appColorAccentRed.withOpacity(0.4),
+        color: AppColor.appColorMainRed.withOpacity(0.2),
       ),
       padding: EdgeInsets.all(customHeight(context, percentage: 0.007)),
       child: Container(
         decoration: ShapeDecoration(
           shape: CircleBorder(),
-          color: AppColor.appColorAccentRed.withOpacity(0.4),
+          color: AppColor.appColorMainRed.withOpacity(0.4),
         ),
         padding: EdgeInsets.all(customHeight(context, percentage: 0.009)),
         child: Container(
           decoration: ShapeDecoration(
             shape: CircleBorder(),
-            color: AppColor.appColorAccentRed,
+            color: AppColor.appColorMainRed.withOpacity(0.6),
           ),
           padding: EdgeInsets.all(customHeight(context, percentage: 0.007)),
           child: ElevatedButton(
@@ -27,7 +29,7 @@ customHomeButton(BuildContext context) {
             },
             style: ButtonStyle(
               backgroundColor:
-                  MaterialStateProperty.all(AppColor.appColorCornflowerBlue),
+                  MaterialStateProperty.all(AppColor.appColorMainRed),
               shape: MaterialStateProperty.all<CircleBorder>(
                 CircleBorder(),
               ),
@@ -55,7 +57,7 @@ customTextFieldTracking(context) {
             ),
             borderSide: BorderSide(
               width: customHeight(context, percentage: 0.003),
-              color: AppColor.appColorCornflowerBlue,
+              color: AppColor.appColorMainRed,
             ),
           ),
           hintText: 'Tracking number',
@@ -77,7 +79,7 @@ customTextFieldTracking(context) {
             child: SizedBox(
                 height: customHeight(context, percentage: 0.075),
                 child: IconButton(
-                  icon: SvgPicture.asset('assets/track_icon.svg'),
+                  icon: SvgPicture.asset('assets/track_icon.svg',color: AppColor.appColorMainRed,),
                   onPressed: () {},
                 )),
           ))
@@ -85,7 +87,7 @@ customTextFieldTracking(context) {
   );
 }
 
-customAdsBanner(context) {
+customAdsBanner(context,HomePageViewModel model) {
   return SizedBox(
     width: customWidth(context),
     child: Padding(
@@ -104,21 +106,24 @@ customAdsBanner(context) {
                     customHeight(context, percentage: 0.014))),
             width: customWidth(context, percentage: 0.8),
             height: customHeight(context, percentage: 0.16),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(model.adsList[model.currentAdsIndex],fit: BoxFit.fill,)),
           ),
           Gap(customHeight(context, percentage: 0.02)),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
-              4,
+              5,
               (index) => Container(
                 width: customHeight(context, percentage: 0.01),
                 height: customHeight(context, percentage: 0.01),
                 margin: const EdgeInsets.symmetric(horizontal: 4),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: index != 2
+                  color: index != model.currentAdsIndex
                       ? AppColor.appColorGreylight
-                      : AppColor.appColorAccentRed,
+                      : AppColor.appColorMainBlack,
                 ),
               ),
             ),

@@ -47,7 +47,7 @@ class HomeManagerPageView extends StatelessWidget {
                 child: customShipmentsList(context, model)),
             floatingActionButton: FloatingActionButton(
               elevation: 30,
-              backgroundColor: AppColor.appColorCornflowerBlue,
+              backgroundColor: AppColor.appColorMainRed,
               child: Icon(Icons.add, color: AppColor.appColorWhite),
               onPressed: () {
                 context.push(ManagerSendShipmentPageViewRoute.path);

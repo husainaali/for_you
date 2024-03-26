@@ -16,7 +16,7 @@ customPicker(BuildContext context, title, address, backgroundColor, height,
             ),
           ),
           side: MaterialStateProperty.all<BorderSide>(
-              BorderSide(color: AppColor.appColorCornflowerBlue)),
+              BorderSide(color: AppColor.appColorMainRed)),
           backgroundColor: MaterialStateProperty.all(backgroundColor),
         ),
         onPressed: () {
@@ -38,7 +38,7 @@ customPicker(BuildContext context, title, address, backgroundColor, height,
                 style: TextStyle(
                     fontSize: customHeight(context, percentage: 0.04),
                     fontWeight: FontWeight.w200,
-                    color: AppColor.appColorCornflowerBlue),
+                    color: AppColor.appColorMainRed),
                 maxLines: maxLine,
               ),
             ),

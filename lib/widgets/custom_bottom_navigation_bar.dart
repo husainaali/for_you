@@ -41,58 +41,58 @@ Widget bottomNavigationBar(context, WrapperViewModel model) {
             icon: Icon(
               Icons.home,
               color: model.selectedItem == 0
-                  ? AppColor.appColorAccentRed
+                  ? AppColor.appColorMainBlack
                   : AppColor.appColorGreylight,
             ),
-            backgroundColor: AppColor.appColorCornflowerBlue,
+            backgroundColor: AppColor.appColorMainRed,
             label: ''),
         BottomNavigationBarItem(
             icon: model.userData?.role == 'User'
                 ? Icon(
                     Icons.pin_drop,
                     color: model.selectedItem == 1
-                        ? AppColor.appColorAccentRed
+                        ? AppColor.appColorMainBlack
                         : AppColor.appColorGreylight,
                   )
                 : model.userData?.role == 'Manager'
                     ? SvgPicture.asset(
                         'assets/employees_icon.svg',
                         color: model.selectedItem == 1
-                            ? AppColor.appColorAccentRed
+                            ? AppColor.appColorMainBlack
                             : AppColor.appColorGreylight,
                       )
                     : SvgPicture.asset(
                         'assets/manager_icon.svg',
                         color: model.selectedItem == 1
-                            ? AppColor.appColorAccentRed
+                            ? AppColor.appColorMainBlack
                             : AppColor.appColorGreylight,
                       ),
-            backgroundColor: AppColor.appColorCornflowerBlue,
+            backgroundColor: AppColor.appColorMainRed,
             label: ''),
         BottomNavigationBarItem(
             icon: model.userData?.role == 'User'
                 ? Icon(
                     Icons.calculate,
                     color: model.selectedItem == 2
-                        ? AppColor.appColorAccentRed
+                        ? AppColor.appColorMainBlack
                         : AppColor.appColorGreylight,
                   )
                 : SvgPicture.asset(
                     'assets/map.svg',
                     color: model.selectedItem == 2
-                        ? AppColor.appColorAccentRed
+                        ? AppColor.appColorMainBlack
                         : AppColor.appColorGreylight,
                   ),
-            backgroundColor: AppColor.appColorCornflowerBlue,
+            backgroundColor: AppColor.appColorMainRed,
             label: ''),
         BottomNavigationBarItem(
             icon: Icon(
               Icons.person,
               color: model.selectedItem == 3
-                  ? AppColor.appColorAccentRed
+                  ? AppColor.appColorMainBlack
                   : AppColor.appColorGreylight,
             ),
-            backgroundColor: AppColor.appColorCornflowerBlue,
+            backgroundColor: AppColor.appColorMainRed,
             label: ''),
       ]);
 }

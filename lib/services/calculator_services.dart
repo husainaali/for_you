@@ -137,7 +137,7 @@ class CalculatorServices {
 
 
 Future<bool> getAddresses(
-      userId) async {
+      userId,role) async {
     bool status = false;
     final String apiUrl = AppConfig.appBaseUrl + AppConfig.getAddresses;
     var tempAddressesList = <Addresses>[];
@@ -146,6 +146,7 @@ Future<bool> getAddresses(
       Uri.parse(apiUrl),
       body: {
         'user_id': '$userId',
+        'role':'$role'
       },
     );
 

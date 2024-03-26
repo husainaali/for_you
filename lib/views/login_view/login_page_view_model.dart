@@ -39,6 +39,7 @@ class LoginPageViewModel extends BaseModel {
   User userInformation = User();
 
   bool isLoginPage = true;
+  bool isRiveLogo = true;
 
   bool isUser = true;
 
@@ -48,13 +49,21 @@ class LoginPageViewModel extends BaseModel {
 
   int selectedCompanySize =0;
 
-  initialize() {}
+  initialize() {
+    logoTransetion();
+
+  }
   registrationInitialize(userName, password) {
     userInformation.companySize ="Small";
     userInformation.email = userName;
     userInformation.password = password;
   }
-
+  logoTransetion(){
+  Timer.periodic(Duration(milliseconds: 3050), (timer) {
+      isRiveLogo=!isRiveLogo;
+      notifyListeners();
+     });
+  }
   Future<void> generalRequester(context) async {
     print('login page');
     wrapperViewModel.changePage(context);

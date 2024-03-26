@@ -19,7 +19,7 @@ class SettingPageView extends StatelessWidget {
     return ViewModelBuilder<SettingPageViewModel>.reactive(
         viewModelBuilder: () => SettingPageViewModel(),
         onViewModelReady: (model) => model.initialize(),
-        builder: (context, model, child) => Scaffold(
+        builder: (context, model, child) =>model.busy? customLoading(): Scaffold(
             appBar: customShortAppBar(context),
             backgroundColor: Colors.white,
             body: SafeArea(
@@ -35,11 +35,11 @@ class SettingPageView extends StatelessWidget {
                     AppColor.appColorCornflowerBlueLight,
                     0.1,
                     2,
-                    SvgPicture.asset('assets/profile_icon.svg'),
+                    SvgPicture.asset('assets/profile_icon.svg',color: AppColor.appColorMainRed,),
                     
                     model,'UserInfo',actionButton: IconButton(
                         onPressed: () {},
-                        icon: SvgPicture.asset('assets/edit_icon.svg')),),
+                        icon: SvgPicture.asset('assets/edit_icon.svg',color: AppColor.appColorMainRed,)),),
                 customPicker(
                     context,
                     '',
@@ -48,7 +48,7 @@ class SettingPageView extends StatelessWidget {
                     0.08,
                     2,
                     Icon(Icons.pin_drop,
-                        color: AppColor.appColorCornflowerBlue,
+                        color: AppColor.appColorMainRed,
                         size: customHeight(context, percentage: 0.045)),
                     
                     model,'addresses',actionButton:  IconButton(
@@ -57,7 +57,7 @@ class SettingPageView extends StatelessWidget {
                                       context.push(AddressesControlPageViewRoute.path,extra: {'addressId':null});
 
                         },
-                        icon: SvgPicture.asset('assets/edit_icon.svg')),),
+                        icon: SvgPicture.asset('assets/edit_icon.svg',color: AppColor.appColorMainRed)),),
                 customPicker(
                     context,
                     '',
@@ -66,11 +66,11 @@ class SettingPageView extends StatelessWidget {
                     0.08,
                     2,
                     Icon(Icons.notifications_none_outlined,
-                        color: AppColor.appColorCornflowerBlue,
+                        color: AppColor.appColorMainRed,
                         size: customHeight(context, percentage: 0.045)),
                     
                     model,'notifications',actionButton: Switch(
-                      activeColor: AppColor.appColorCornflowerBlue,
+                      activeColor: AppColor.appColorMainRed,
                       value: true,
                       onChanged: (value) {},
                     ),),
@@ -82,15 +82,17 @@ class SettingPageView extends StatelessWidget {
                     0.08,
                     2,
                     SvgPicture.asset('assets/support_icon.svg',
-                        color: AppColor.appColorCornflowerBlue,
+                        color: AppColor.appColorMainRed,
                         height: customHeight(context, percentage: 0.04)),
                     
                     model,'help',actionButton:  IconButton(
                         onPressed: () {},
                         icon: const Icon(
                           Icons.arrow_forward_ios,
-                          color: AppColor.appColorCornflowerBlue,
+                          color: AppColor.appColorMainRed,
                         )),),
+
+                      if(model.userData!.role=='Manager') imagePickerWidget(context, model),
                 Gap(customHeight(context, percentage: 0.03)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -99,18 +101,20 @@ class SettingPageView extends StatelessWidget {
                         onPressed: () {},
                         icon: const Icon(
                           Icons.swap_horizontal_circle_rounded,
-                          color: AppColor.appColorCornflowerBlue,
+                          color: AppColor.appColorMainRed,
                         )),
                     const Text(
                       'عربي',
                       style: TextStyle(
-                          color: AppColor.appColorCornflowerBlue, fontSize: 15),
+                          color: AppColor.appColorMainRed, fontSize: 15),
                     ),
                     SizedBox(
                       width: customWidth(context, percentage: 0.06),
                     )
                   ],
                 ),
+
+
                 Padding(
                   padding: EdgeInsets.only(
                     left: customWidth(context, percentage: 0.2),
@@ -128,7 +132,7 @@ class SettingPageView extends StatelessWidget {
                           ),
                         ),
                         backgroundColor: MaterialStateProperty.all(
-                            AppColor.appColorCornflowerBlue),
+                            AppColor.appColorMainRed),
                       ),
                       onPressed: () {
                         model.logout(context);
@@ -139,7 +143,7 @@ class SettingPageView extends StatelessWidget {
                           SvgPicture.asset(
                             'assets/logout_icon.svg',
                             height: customHeight(context, percentage: 0.03),
-                            color: AppColor.appColorAccentRed,
+                            color: AppColor.appColorMainBlack,
                           ),
                           Gap(customWidth(context, percentage: 0.02)),
                           AutoSizeText(

@@ -4,7 +4,7 @@ Scaffold customLoading() {
   return const Scaffold(
     body: Center(
       child: CircularProgressIndicator(
-        color: AppColor.appColorCornflowerBlue,
+        color: AppColor.appColorMainRed,
       ),
     ),
   );

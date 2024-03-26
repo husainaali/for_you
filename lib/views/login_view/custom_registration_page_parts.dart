@@ -11,14 +11,14 @@ customRegistrationTextFeild(
     // obscureText: true,
     decoration: InputDecoration(
       labelText: label,
-      labelStyle: const TextStyle(color: AppColor.appColorCornflowerBlue),
+      labelStyle: const TextStyle(color: AppColor.appColorMainRed),
       hintText: 'Enter your $label',
       hintStyle: const TextStyle(color: AppColor.appColorGreyNormal),
       enabledBorder: const UnderlineInputBorder(
         borderSide: BorderSide(color: AppColor.appColorGreyNormal),
       ),
       focusedBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(color: AppColor.appColorCornflowerBlue),
+        borderSide: BorderSide(color: AppColor.appColorMainRed),
       ),
     ),
   );

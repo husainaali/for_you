@@ -13,7 +13,7 @@ customDropDownMenuCalculatorPage(context, list, listName, CalculatorPageViewMode
         icon: Icon(
           Icons.keyboard_arrow_down,
           size: customHeight(context, percentage: 0.042),
-          color: AppColor.appColorCornflowerBlue,
+          color: AppColor.appColorMainRed,
         ),
         decoration: InputDecoration(
           fillColor: AppColor.appColorGreyNormal,
@@ -24,7 +24,7 @@ customDropDownMenuCalculatorPage(context, list, listName, CalculatorPageViewMode
             ),
             borderSide: BorderSide(
               width: customHeight(context, percentage: 0.003),
-              color: AppColor.appColorCornflowerBlue,
+              color: AppColor.appColorMainRed,
             ),
           ),
           enabledBorder: OutlineInputBorder(
@@ -34,11 +34,11 @@ customDropDownMenuCalculatorPage(context, list, listName, CalculatorPageViewMode
             ),
             borderSide: BorderSide(
               width: customHeight(context, percentage: 0.003),
-              color: AppColor.appColorCornflowerBlue,
+              color: AppColor.appColorMainRed,
             ),
           ),
-          hoverColor: AppColor.appColorCornflowerBlue,
-          focusColor: AppColor.appColorCornflowerBlue,
+          hoverColor: AppColor.appColorMainRed,
+          focusColor: AppColor.appColorMainRed,
           hintText: 'Select a country',
           hintStyle: const TextStyle(color: AppColor.appColorGreyNormal),
           border: OutlineInputBorder(
@@ -52,7 +52,7 @@ customDropDownMenuCalculatorPage(context, list, listName, CalculatorPageViewMode
           left: Radius.circular(customHeight(context, percentage: 0.04)),
           right: Radius.circular(customHeight(context, percentage: 0.04)),
         ),
-        style: TextStyle(color: AppColor.appColorCornflowerBlue),
+        style: TextStyle(color: AppColor.appColorMainRed),
         items: listName == 'FromCountry' || listName == 'ToCountry'
             ? list.map<DropdownMenuItem<String>>((Country country) {
                 return DropdownMenuItem<String>(
@@ -108,7 +108,7 @@ customDropDownMenuAddressesPage(context, list, listName, CalculatorPageViewModel
         icon: Icon(
           Icons.keyboard_arrow_down,
           size: customHeight(context, percentage: 0.042),
-          color: AppColor.appColorCornflowerBlue,
+          color: AppColor.appColorMainRed,
         ),
         decoration: InputDecoration(
           fillColor: AppColor.appColorGreyNormal,
@@ -119,7 +119,7 @@ customDropDownMenuAddressesPage(context, list, listName, CalculatorPageViewModel
             ),
             borderSide: BorderSide(
               width: customHeight(context, percentage: 0.003),
-              color: AppColor.appColorCornflowerBlue,
+              color: AppColor.appColorMainRed,
             ),
           ),
           enabledBorder: OutlineInputBorder(
@@ -129,11 +129,11 @@ customDropDownMenuAddressesPage(context, list, listName, CalculatorPageViewModel
             ),
             borderSide: BorderSide(
               width: customHeight(context, percentage: 0.003),
-              color: AppColor.appColorCornflowerBlue,
+              color: AppColor.appColorMainRed,
             ),
           ),
-          hoverColor: AppColor.appColorCornflowerBlue,
-          focusColor: AppColor.appColorCornflowerBlue,
+          hoverColor: AppColor.appColorMainRed,
+          focusColor: AppColor.appColorMainRed,
           hintText: listName=='AddressCountry'?'Select a country':'Select a city',
           hintStyle: const TextStyle(color: AppColor.appColorGreyNormal),
           border: OutlineInputBorder(
@@ -147,7 +147,7 @@ customDropDownMenuAddressesPage(context, list, listName, CalculatorPageViewModel
           left: Radius.circular(customHeight(context, percentage: 0.04)),
           right: Radius.circular(customHeight(context, percentage: 0.04)),
         ),
-        style: TextStyle(color: AppColor.appColorCornflowerBlue),
+        style: TextStyle(color: AppColor.appColorMainRed),
         items: listName == 'AddressCountry'
             ? list.map<DropdownMenuItem<String>>((Country country) {
                 return DropdownMenuItem<String>(

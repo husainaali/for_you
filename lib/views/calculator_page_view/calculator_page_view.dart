@@ -13,7 +13,7 @@ part 'custom_calculator_parts.dart';
 class CalculatorPageView extends StatelessWidget {
   CalculatorPageView({super.key});
   final Icon leadingIcon =
-      const Icon(Icons.home, color: AppColor.appColorCornflowerBlue);
+      const Icon(Icons.home, color: AppColor.appColorMainRed);
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CalculatorPageViewModel>.reactive(
@@ -34,7 +34,7 @@ class CalculatorPageView extends StatelessWidget {
                       '   Shipment from*',
                       maxFontSize: 24,
                       minFontSize: 18,
-                      style: TextStyle(color: AppColor.appColorCornflowerBlue),
+                      style: TextStyle(color: AppColor.appColorMainRed),
                     ),
                     // customPicker(
                     //   context,
@@ -63,7 +63,7 @@ class CalculatorPageView extends StatelessWidget {
                       '   Shipment to*',
                       maxFontSize: 24,
                       minFontSize: 18,
-                      style: TextStyle(color: AppColor.appColorCornflowerBlue),
+                      style: TextStyle(color: AppColor.appColorMainRed),
                     ),
                     customDropDownMenuCalculatorPage(
                         context, model.countryList, 'ToCountry', model),
@@ -76,7 +76,7 @@ class CalculatorPageView extends StatelessWidget {
                       '   Weight of package*',
                       maxFontSize: 24,
                       minFontSize: 18,
-                      style: TextStyle(color: AppColor.appColorCornflowerBlue),
+                      style: TextStyle(color: AppColor.appColorMainRed),
                     ),
                     Padding(
                       padding: EdgeInsets.only(
@@ -127,14 +127,14 @@ class CalculatorPageView extends StatelessWidget {
                                           width: customHeight(context,
                                               percentage: 0.003),
                                           color:
-                                              AppColor.appColorCornflowerBlue,
+                                              AppColor.appColorMainRed,
                                         ),
                                       ),
                                       alignLabelWithHint: true,
                                       hintText: '0.5',
                                       hintStyle: const TextStyle(
                                           color:
-                                              AppColor.appColorCornflowerBlue),
+                                              AppColor.appColorMainRed),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.horizontal(
                                           left: Radius.circular(
@@ -305,7 +305,7 @@ class CalculatorPageView extends StatelessWidget {
                                           if (states.contains(
                                               MaterialState.selected)) {
                                             return AppColor
-                                                .appColorAccentRed; // Sets the color of the circle when it's selected to red
+                                                .appColorMainBlack; // Sets the color of the circle when it's selected to red
                                           }
                                           return AppColor
                                               .appColorGreyNormal; // Sets the color of the circle when it's not selected
@@ -349,7 +349,7 @@ class CalculatorPageView extends StatelessWidget {
                                           if (states.contains(
                                               MaterialState.selected)) {
                                             return AppColor
-                                                .appColorAccentRed; // Sets the color of the circle when it's selected to red
+                                                .appColorMainBlack; // Sets the color of the circle when it's selected to red
                                           }
                                           return AppColor
                                               .appColorGreyNormal; // Sets the color of the circle when it's not selected
@@ -401,7 +401,7 @@ class CalculatorPageView extends StatelessWidget {
                                     MaterialStateProperty.resolveWith<Color>(
                                         (states) {
                                   if (states.contains(MaterialState.selected)) {
-                                    return AppColor.appColorAccentRed;
+                                    return AppColor.appColorMainBlack;
                                   }
                                   return AppColor.appColorGreyNormal;
                                 }),
@@ -474,7 +474,7 @@ class CalculatorPageView extends StatelessWidget {
                       '   Shipping method*',
                       maxFontSize: 24,
                       minFontSize: 18,
-                      style: TextStyle(color: AppColor.appColorCornflowerBlue),
+                      style: TextStyle(color: AppColor.appColorMainRed),
                     ),
                     model.showShippingMethods &&
                             model.shippingMethods.isNotEmpty
@@ -505,7 +505,7 @@ class CalculatorPageView extends StatelessWidget {
                                           index ==
                                                   model
                                                       .shippingMethodSelectedIndex
-                                              ? AppColor.appColorCornflowerBlue
+                                              ? AppColor.appColorMainRed
                                               : AppColor.appColorGreyNormal,
                                           '${model.totalPrice(double.parse(model.shippingMethods[index].shippingRat!))} BHD - $shippingMethodName',
                                           model,
